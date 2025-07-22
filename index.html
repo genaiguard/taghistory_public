@@ -48,6 +48,10 @@
         page_title: 'TagLogger - Track AirTag Location History',
         page_location: 'https://taglogger.com'
       });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
     </script>
     
     <!-- Preload Critical Resources -->
@@ -75,7 +79,7 @@
       }(window.location))
     </script>
     <!-- End SPA redirect script -->
-    <script type="module" crossorigin src="/assets/index-NYI5nwq9.js"></script>
+    <script type="module" crossorigin src="/assets/index-D2x8AkGh.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CV9ZWeGw.css">
   </head>
   <body>
