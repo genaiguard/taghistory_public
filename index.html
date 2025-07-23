@@ -56,20 +56,28 @@
     
     <!-- Meta Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1412716219985518');
-    fbq('track', 'PageView');
-    
-    // Make fbq globally accessible for debugging
-    window.fbq = fbq;
-    console.log('Meta Pixel initialized for TagLogger');
+    // Prevent double initialization
+    if (!window._metaPixelInitialized) {
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1412716219985518');
+      fbq('track', 'PageView');
+      
+      // Mark as initialized to prevent duplicates
+      window._metaPixelInitialized = true;
+      
+      // Make fbq globally accessible for debugging
+      window.fbq = fbq;
+      console.log('Meta Pixel initialized for TagLogger');
+    } else {
+      console.log('Meta Pixel already initialized, skipping duplicate initialization');
+    }
     </script>
     <!-- End Meta Pixel Code -->
     
@@ -98,7 +106,7 @@
       }(window.location))
     </script>
     <!-- End SPA redirect script -->
-    <script type="module" crossorigin src="/assets/index-BxZBp1Ep.js"></script>
+    <script type="module" crossorigin src="/assets/index-B4N6uC3P.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-gxZ1eIlg.css">
   </head>
   <body>
