@@ -10,32 +10,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Primary Meta Tags -->
-    <title>Track AirTag Location History | Android & iOS | TagLogger</title>
-    <meta name="title" content="TagLogger - Unlock the AirTag location history and more." />
-    <meta name="description" content="TagLogger shows AirTag location history on Android, iOS, and desktop. View timeline maps, export data, and track with geofencing alerts.">
-    <meta name="keywords" content="AirTag location history, track AirTag history, AirTag timeline, AirTag tracking app, AirTag Android, Apple AirTag location export, TagLogger, geofencing AirTag, historical AirTag map">
+    <title>Asset Tracking With AirTags for Teams | TagLogger</title>
+    <meta name="title" content="TagLogger | Asset Tracking With AirTags for Teams" />
+    <meta name="description" content="TagLogger helps businesses track tools, vehicles, and field equipment with location history, geofence alerts, and inventory workflows.">
+    <meta name="keywords" content="asset tracking software, AirTag tracking for business, geofence alerts, equipment tracking, fleet asset visibility, inventory workflows, TagLogger">
     <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
     <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://taglogger.com" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://taglogger.com">
-    <meta property="og:title" content="Track AirTag Location History with TagLogger">
-    <meta property="og:description" content="Unlock historical location data and timeline maps from your AirTag. Works on Android, iOS, Windows – no Apple-only limits.">
+    <meta property="og:title" content="TagLogger | Asset Tracking With AirTags for Teams">
+    <meta property="og:description" content="Track tools, vehicles, and field equipment with location history, geofence alerts, and inventory workflows.">
+    <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://taglogger.com/og-image.png">
+    <meta property="og:image:alt" content="TagLogger asset tracking platform preview">
+    <meta property="og:image:width" content="2400">
+    <meta property="og:image:height" content="1198">
     <meta property="og:site_name" content="TagLogger" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://taglogger.com" />
-    <meta name="twitter:title" content="Track AirTag Location History | TagLogger">
-    <meta name="twitter:description" content="View your AirTag's travel history, set alerts, and manage assets from any device. Try TagLogger today.">
+    <meta name="twitter:title" content="TagLogger | Asset Tracking With AirTags for Teams">
+    <meta name="twitter:description" content="Track tools, vehicles, and field equipment with location history, geofence alerts, and inventory workflows.">
     <meta name="twitter:image" content="https://taglogger.com/og-image.png">
+    <meta name="twitter:image:alt" content="TagLogger asset tracking platform preview">
     
     <!-- Additional Meta Tags -->
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#f8f9fa" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
     <!-- Google Analytics 4 -->
@@ -45,7 +53,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-3J35H2ZZB8', {
-        page_title: 'TagLogger - Track AirTag Location History',
+        page_title: 'TagLogger - Asset Tracking With AirTags for Teams',
         page_location: 'https://taglogger.com'
       });
       
@@ -131,23 +139,46 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "TagLogger",
-      "description": "TagLogger shows AirTag location history on Android, iOS, and desktop. View timeline maps, export data, and track with geofencing alerts.",
-      "url": "https://taglogger.com",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "12.99",
-        "priceCurrency": "USD",
-        "description": "Monthly subscription starting at $12.99 per AirTag"
-      },
-      "provider": {
-        "@type": "Organization",
-        "name": "TagLogger",
-        "url": "https://taglogger.com"
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://taglogger.com/#organization",
+          "name": "TagLogger",
+          "url": "https://taglogger.com",
+          "logo": "https://taglogger.com/favicon-96x96.png"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://taglogger.com/#website",
+          "name": "TagLogger",
+          "url": "https://taglogger.com",
+          "publisher": { "@id": "https://taglogger.com/#organization" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://taglogger.com/#software",
+          "name": "TagLogger",
+          "description": "TagLogger helps businesses track tools, vehicles, and field equipment with location history, geofence alerts, and inventory workflows.",
+          "url": "https://taglogger.com",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web Browser",
+          "provider": { "@id": "https://taglogger.com/#organization" },
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Pre-configured tags (one-time)",
+              "price": "15.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "Monthly subscription (starts at)",
+              "price": "10.00",
+              "priceCurrency": "USD"
+            }
+          ]
+        }
+      ]
     }
     </script>
   </body>
