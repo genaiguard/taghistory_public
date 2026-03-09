@@ -1,15 +1,6 @@
 {
-  "name": "TagLogger",
-  "short_name": "TagLogger",
-  "description": "Asset tracking for tools, vehicles, and field equipment.",
-  "id": "/",
-  "lang": "en-US",
-  "start_url": "/",
-  "scope": "/",
-  "categories": [
-    "business",
-    "productivity"
-  ],
+  "name": "MyWebSite",
+  "short_name": "MySite",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -24,11 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#f8f9fa",
-  "background_color": "#f8f9fa",
-  "display_override": [
-    "standalone",
-    "browser"
-  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone"
 }
