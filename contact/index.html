@@ -2,94 +2,115 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact TagLogger</title>
-    <meta name="description" content="Contact TagLogger for sales, onboarding, and platform questions." />
+
+    <title>Contact TagLogger | AirTag Tracking for Teams</title>
+    <meta name="title" content="Contact TagLogger | AirTag Tracking for Teams" />
+    <meta
+      name="description"
+      content="Contact TagLogger for sales, onboarding, rollout planning, and pricing for AirTag-based asset tracking."
+    />
+    <meta name="keywords" content="contact TagLogger, asset tracking demo, AirTag tracking sales, TagLogger pricing help" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
     <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://taglogger.com/contact/" />
-    <style>
-      :root {
-        --bg: #f8fafc;
-        --surface: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --line: #e2e8f0;
-        --accent: #1d4ed8;
-      }
 
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.55;
-      }
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/contact/" />
+    <meta property="og:title" content="Contact TagLogger | AirTag Tracking for Teams" />
+    <meta
+      property="og:description"
+      content="Talk to TagLogger about pricing, hardware options, rollout planning, and asset-tracking requirements."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
 
-      .wrap {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 42px 20px 64px;
-      }
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/contact/" />
+    <meta name="twitter:title" content="Contact TagLogger | AirTag Tracking for Teams" />
+    <meta
+      name="twitter:description"
+      content="Talk to TagLogger about pricing, hardware options, rollout planning, and asset-tracking requirements."
+    />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
 
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 30px;
-      }
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-      h1 {
-        margin: 0 0 10px;
-        line-height: 1.2;
-      }
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: 'Contact TagLogger | AirTag Tracking for Teams',
+        page_location: 'https://taglogger.com/contact/'
+      });
+      window.gtag = gtag;
+    </script>
 
-      p {
-        color: var(--muted);
-        margin: 10px 0;
+    <script>
+      if (!window._metaPixelInitialized) {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+        window._metaPixelInitialized = true;
+        window.fbq = fbq;
       }
+    </script>
 
-      .actions {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-      }
-
-      .btn {
-        display: inline-block;
-        text-decoration: none;
-        border-radius: 999px;
-        padding: 10px 14px;
-        font-weight: 600;
-      }
-
-      .btn-primary {
-        background: var(--accent);
-        border: 1px solid var(--accent);
-        color: #ffffff;
-      }
-
-      .btn-ghost {
-        border: 1px solid rgba(29, 78, 216, 0.24);
-        background: rgba(29, 78, 216, 0.06);
-        color: var(--accent);
-      }
-    </style>
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "tf2fjljjt0");
+    </script>
+    <script type="module" crossorigin src="/assets/main-CePCRZdL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main--KI9c_Kl.css">
   </head>
   <body>
-    <main class="wrap">
-      <section class="card" aria-labelledby="contact-title">
-        <h1 id="contact-title">Contact TagLogger</h1>
-        <p>Our contact and demo request form is part of the main landing page under the <strong>Get in Touch</strong> section.</p>
-        <p>Use the button below to jump directly to that section and submit your request.</p>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
 
-        <div class="actions">
-          <a class="btn btn-primary" href="/#get-in-touch">Open Get in Touch Form</a>
-          <a class="btn btn-ghost" href="/">Back to Home</a>
-          <a class="btn btn-ghost" href="/privacy/">Privacy Policy</a>
-        </div>
-      </section>
-    </main>
+    <div id="root"></div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact TagLogger",
+      "url": "https://taglogger.com/contact/",
+      "description": "Contact TagLogger for sales, onboarding, rollout planning, and pricing for AirTag-based asset tracking.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "TagLogger",
+        "url": "https://taglogger.com"
+      }
+    }
+    </script>
   </body>
 </html>
