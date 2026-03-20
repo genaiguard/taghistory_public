@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirTag Location History in TagLogger | History Playback</title>
+    <meta name="title" content="AirTag Location History in TagLogger | History Playback" />
+    <meta name="description" content="View AirTag location history in TagLogger by selecting a tag, choosing a preset or custom time range, and reviewing movement with path lines or timeline playback." />
+    <meta name="keywords" content="History Playback, resources, AirTag tracking, TagLogger" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/resources/history-playback/" />
+    <meta property="og:title" content="AirTag Location History in TagLogger | History Playback" />
+    <meta property="og:description" content="View AirTag location history in TagLogger by selecting a tag, choosing a preset or custom time range, and reviewing movement with path lines or timeline playback." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/resources/history-playback/" />
+    <meta name="twitter:title" content="AirTag Location History in TagLogger | History Playback" />
+    <meta name="twitter:description" content="View AirTag location history in TagLogger by selecting a tag, choosing a preset or custom time range, and reviewing movement with path lines or timeline playback." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href="https://taglogger.com/resources/history-playback/" />
+    <meta name="generator" content="TagLogger static public content generator 2026-03-20" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
+
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
+
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
+
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
+
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
+
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
+
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
+
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
+
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-BBtKuq_Y.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-BETMJgor.css">
+  </head>
+  <body>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><main id="main-content" class="industry-solution-page" role="main" tabindex="-1"><section class="industry-solution-hero" aria-labelledby="industry-solution-page-title"><div class="industry-solution-hero-noise" aria-hidden="true"></div><div class="industry-solution-container"><p class="industry-solution-eyebrow">Resource</p><h1 id="industry-solution-page-title" class="industry-solution-title">AirTag Location History and History Playback</h1><p class="industry-solution-subtitle">Review where a tag moved over time and use history playback to inspect movement across the time range that matters.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><h2>What AirTag location history looks like in TagLogger</h2><p>TagLogger gives teams a practical way to review AirTag location history over a selected time window. Instead of only checking the latest location, teams can look back across recent movement and understand how a tag traveled through a route, site, yard, or service area.</p><p>That makes this view useful for follow-up, verification, and operational review when the question is not only where a tag is now, but where it was during a specific period.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><h2>How to use history playback on the map page</h2><ol class="industry-solution-step-list"><li>Open the map page and switch to the History Playback section.</li><li>Select the tag whose location history should be reviewed.</li><li>Choose a predefined time range or switch to a custom time range.</li><li>Review the location history for that tag and time window.</li></ol></div></section><section class="industry-solution-section"><div class="industry-solution-container"><h2>Choosing the right time range for AirTag location history</h2><p>Predefined ranges are useful when the goal is a quick operational review, for example looking back a few hours or reviewing the recent day. A custom range is useful when a team needs to investigate a specific time window more precisely.</p><p>The most useful range is usually the smallest one that still covers the event being reviewed. That keeps the map easier to read and reduces noise from unrelated movement.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><h2>Path lines and timeline playback</h2><p>Path lines help show the overall route between recorded points. They are useful when the main goal is understanding the broader movement pattern or seeing how a tag traveled across an area.</p><p>Timeline playback is useful when movement should be reviewed in sequence over time. TagLogger also includes playback speed controls, but the main operational decision is usually simpler than that: whether a static route view is enough or whether the movement should be reviewed step by step.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><h2>When teams use AirTag location history most</h2><ul><li>Reviewing where an asset moved during a shift, route, or job window</li><li>Checking whether a tag reached or left a site during the expected period</li><li>Looking back at movement before a missing-asset or service follow-up</li><li>Comparing a quick route view against a point-by-point playback review</li></ul></div></section><section class="industry-solution-section" aria-labelledby="industry-solution-faq-title"><div class="industry-solution-container"><h2 id="industry-solution-faq-title">Frequently Asked Questions</h2><div class="industry-solution-faq-list"><article class="industry-solution-faq-item"><h3>Can AirTags show location history in TagLogger?</h3><p>Yes. TagLogger provides AirTag location history so teams can review where a tag was seen over a selected time range instead of only checking the latest location.</p></article><article class="industry-solution-faq-item"><h3>How do teams view AirTag location history?</h3><p>On the map page, teams select a tag, choose a preset or custom time range, and then review the loaded history with path lines or timeline playback.</p></article><article class="industry-solution-faq-item"><h3>What is the difference between path lines and timeline playback?</h3><p>Path lines show the overall route between recorded points, while timeline playback helps review movement in sequence over time. Teams use whichever view matches the kind of follow-up they need.</p></article></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class="industry-solution-cta-box"><h2>Review movement with better context</h2><p>Use AirTag location history, time ranges, path lines, and playback views to understand how tracked assets moved during the period that matters.</p><div class="industry-solution-cta-actions"><a href="/#pricing" class="industry-solution-cta-primary">Get Started</a><a href="/#get-in-touch" class="industry-solution-cta-secondary">Get in Touch</a></div></div></div></section><section class="industry-solution-section industry-solution-related" aria-labelledby="related-links-title"><div class="industry-solution-container"><h2 id="related-links-title">Related Pages</h2><div class="industry-solution-related-group"><h3>Resources</h3><div class="industry-solution-chip-grid"><a class="industry-solution-chip-link" href="/resources/how-to-create-a-geofence/" data-discover="true">Geofence Setup</a><a class="industry-solution-chip-link" href="/resources/edit-tag-names-and-colors/" data-discover="true">Tag Setup</a></div></div></div></section></main></div>
+    <script type="application/ld+json" id="taglogger-industry-solution-webpage">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AirTag Location History and History Playback",
+  "description": "View AirTag location history in TagLogger by selecting a tag, choosing a preset or custom time range, and reviewing movement with path lines or timeline playback.",
+  "url": "https://taglogger.com/resources/history-playback/"
+}
+    </script>
+        <script type="application/ld+json" id="taglogger-industry-solution-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can AirTags show location history in TagLogger?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. TagLogger provides AirTag location history so teams can review where a tag was seen over a selected time range instead of only checking the latest location."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do teams view AirTag location history?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On the map page, teams select a tag, choose a preset or custom time range, and then review the loaded history with path lines or timeline playback."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between path lines and timeline playback?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Path lines show the overall route between recorded points, while timeline playback helps review movement in sequence over time. Teams use whichever view matches the kind of follow-up they need."
+      }
+    }
+  ]
+}
+    </script>
+  </body>
+</html>
