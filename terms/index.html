@@ -2,153 +2,182 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terms and Conditions | TagLogger</title>
+    <meta name="title" content="Terms and Conditions | TagLogger" />
     <meta name="description" content="TagLogger Terms and Conditions for use of the TagLogger AirTag asset tracking platform." />
+    <meta name="keywords" content="TagLogger terms, TagLogger terms and conditions, TagLogger legal" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
     <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/terms/" />
+    <meta property="og:title" content="Terms and Conditions | TagLogger" />
+    <meta property="og:description" content="TagLogger Terms and Conditions for use of the TagLogger AirTag asset tracking platform." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/terms/" />
+    <meta name="twitter:title" content="Terms and Conditions | TagLogger" />
+    <meta name="twitter:description" content="TagLogger Terms and Conditions for use of the TagLogger AirTag asset tracking platform." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="canonical" href="https://taglogger.com/terms/" />
-    <style>
-      :root {
-        --bg: #f8fafc;
-        --surface: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --line: #e2e8f0;
-        --accent: #1d4ed8;
-      }
+    <meta name="generator" content="TagLogger static legal page generator 2026-03-20" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
 
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.55;
-      }
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
 
-      .wrap {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 32px 20px 64px;
-      }
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
 
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 28px;
-      }
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
 
-      h1, h2 { line-height: 1.25; margin: 0 0 14px; }
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.2rem; margin-top: 24px; }
-      p, li { color: var(--muted); }
-      ul { margin: 10px 0 0 20px; }
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
 
-      .meta {
-        color: var(--muted);
-        margin: 0 0 18px;
-      }
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
 
-      .nav {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-bottom: 18px;
-      }
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
 
-      .nav a,
-      .cta {
-        display: inline-block;
-        text-decoration: none;
-        color: var(--accent);
-        border: 1px solid rgba(29, 78, 216, 0.25);
-        background: rgba(29, 78, 216, 0.06);
-        border-radius: 999px;
-        padding: 8px 12px;
-        font-size: 0.95rem;
-      }
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
 
-      .cta {
-        margin-top: 20px;
-        background: var(--accent);
-        color: #ffffff;
-        border-color: var(--accent);
-      }
-    </style>
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-BdgNwC0i.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-CCrmdgli.css">
   </head>
   <body>
-    <main class="wrap">
-      <article class="card">
-        <nav class="nav" aria-label="Legal navigation">
-          <a href="/">Home</a>
-          <a href="/privacy/">Privacy Policy</a>
-          <a href="/contact/">Contact</a>
-        </nav>
-
-        <h1>TagLogger Terms and Conditions</h1>
-        <p class="meta"><strong>Last updated:</strong> October 8, 2025</p>
-
-        <h2>1. Acceptance of Terms</h2>
-        <p>By registering for or using TagLogger, you agree to these Terms and our Privacy Policy. If you do not agree, do not use the service.</p>
-
-        <h2>2. Service Description</h2>
-        <p>TagLogger provides a web-based platform for Apple AirTag tracking, including location history, geofencing, data export, and alerting workflows.</p>
-
-        <h2>3. Eligibility and Account Registration</h2>
-        <ul>
-          <li>You must be at least 18 years old and able to form a binding contract.</li>
-          <li>You agree to provide accurate account information and keep credentials secure.</li>
-          <li>You are responsible for activity under your account.</li>
-        </ul>
-
-        <h2>4. Fees and Payment</h2>
-        <ul>
-          <li>Tag purchase: one-time fee per tag based on published pricing.</li>
-          <li>Subscription: recurring fee per tag on your selected billing cycle.</li>
-          <li>Late or failed payments may result in service suspension.</li>
-        </ul>
-
-        <h2>5. Lawful and Authorized Use</h2>
-        <p>You may use the service only to track assets or property you own or are authorized to track. You are responsible for obtaining any legally required consent and notices under applicable privacy, labor, and surveillance laws.</p>
-        <ul>
-          <li>No stalking, harassment, or unauthorized monitoring.</li>
-          <li>No misuse of location data or circumvention of safety safeguards.</li>
-          <li>No interference with service security or operations.</li>
-        </ul>
-
-        <h2>6. Ownership and License</h2>
-        <p>TagLogger and its licensors retain rights in the service. You retain rights to your account and location data, while granting us the limited rights needed to operate the platform.</p>
-
-        <h2>7. Privacy and Data Security</h2>
-        <p>Our Privacy Policy explains data handling. You are responsible for lawful collection and use of location data when tracking assets involving other individuals.</p>
-
-        <h2>8. Disclaimers</h2>
-        <p>The service is provided "as is" and "as available" without warranties of uninterrupted availability, accuracy, or fitness for a particular purpose.</p>
-
-        <h2>9. Limitation of Liability</h2>
-        <p>To the fullest extent allowed by law, TagLogger is not liable for indirect or consequential damages, and aggregate liability is limited as described in the full legal terms.</p>
-
-        <h2>10. Indemnification</h2>
-        <p>You agree to indemnify TagLogger for claims arising from your use of the service, your violation of these terms, or unlawful tracking activity.</p>
-
-        <h2>11. Termination</h2>
-        <p>You may cancel according to your billing terms. TagLogger may suspend or terminate access for non-payment, policy violations, or unlawful use.</p>
-
-        <h2>12. Changes to Service or Terms</h2>
-        <p>We may update these terms and services. Continued use after changes means you accept the updated terms.</p>
-
-        <h2>13. Governing Law and Dispute Resolution</h2>
-        <p>These terms are governed by California law, with dispute handling as described in the full legal terms.</p>
-
-        <h2>14. Legal Compliance</h2>
-        <p>TagLogger is intended for lawful asset tracking. You are solely responsible for compliance with all applicable laws where tracking occurs.</p>
-
-        <h2>15. Contact</h2>
-        <p>For legal or account questions, use the contact page below.</p>
-
-        <a class="cta" href="/contact/">Go to Contact</a>
-      </article>
-    </main>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><main id="main-content" tabindex="-1" class="legal-page" style="min-height:100vh;background:var(--color-bg);color:var(--color-text);font-family:system-ui, -apple-system, sans-serif;padding:80px 0 40px 0"><div style="max-width:800px;margin:0 auto;padding:0 20px"><h1 style="color:var(--color-accent);font-weight:700;font-size:2.5rem;margin-bottom:32px">TagLogger Terms and Conditions</h1><p style="font-size:0.9rem;color:var(--color-text-muted);margin-bottom:32px"><strong>Last updated: October 8, 2025</strong></p><hr style="border:none;border-top:1px solid var(--color-border-light);margin:32px 0"/><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">1. Acceptance of Terms</h2><p>By registering for or using TagLogger’s platform (“Service”), you agree to be bound by these Terms and our Privacy Policy. If you do not agree, do not use the Service.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">2. Service Description</h2><p>TagLogger provides a web‑based platform to track Apple AirTag devices, offering real‑time location, historical playback, geofencing, data export, and customizable alerts. We are an independent service and are not affiliated with Apple Inc.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">3. Eligibility &amp; Account Registration</h2><ul><li>You must be at least 18 years old and able to form a binding contract.</li><li>You agree to provide accurate, current, and complete information during registration and to keep your account credentials secure.</li><li>You are responsible for all activity under your account.</li></ul><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">4. Fees &amp; Payment</h2><ul><li><strong>Tag Purchase</strong>: One‑time fee per AirTag, at prices shown in your dashboard (free continental U.S. shipping).</li><li><strong>Subscription</strong>: Recurring fee per tag billed on your selected cycle (monthly or yearly). Volume discounts apply to newly purchased tags only (see Pricing Page).</li><li><strong>Payment Methods</strong>: Major credit/debit cards and PayPal.</li><li><strong>Non‑Refundable</strong>: All fees are non‑refundable except as required by law.</li><li><strong>Late or Failed Payments</strong>: We may suspend your Service until payment is received.</li></ul><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">5. Use Restrictions</h2><p><strong>5.1 Lawful and Authorized Use Only.</strong> You may use the Service only to track assets, equipment, or property that you own, lease, or are otherwise authorized to track. You must not use the Service to track or monitor any person, vehicle, or property without the knowledge and affirmative consent of the individual(s) involved or the lawful owner. You are solely responsible for obtaining and maintaining all necessary permissions and consents under applicable privacy, data‑protection, and anti‑stalking laws.</p><p><strong>5.2 Prohibited Conduct.</strong> You agree not to use the Service in any manner that:</p><ul><li>(a) violates or circumvents any law or regulation related to electronic surveillance, stalking, or harassment;</li><li>(b) invades another person’s privacy or misuses location data; or</li><li>(c) interferes with the rights or safety of others.</li></ul><p>TagLogger reserves the right to suspend or terminate your account and cooperate with law enforcement if we reasonably believe the Service is being used unlawfully or without consent.</p><p>You must not disable, modify, or attempt to circumvent anti‑stalking or unwanted‑tracking safeguards (including altering tag speakers, firmware, or alerts), or aid others to do so.</p><p>You must not use the Service to evade or defeat safety features or unwanted‑tracking alerts.</p><p>If you use the Service to track assets involving employees or contractors, you represent you have provided required notices and obtained all consents under applicable labor, privacy, and surveillance laws.</p><p><strong>Additionally, you agree not to:</strong></p><ul><li>Reverse engineer, decompile, or otherwise attempt to derive source code.</li><li>Scrape, harvest, or extract data from the Service.</li><li>Interfere with the operation or security of the Service.</li><li>Use the Service for any unlawful purpose or without obtaining all required consents.</li></ul><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">6. Ownership &amp; License</h2><ul><li>TagLogger and its licensors retain all rights in the Service, including software, trademarks, and content.</li><li>You own your location and account data (“Customer Data”) but grant us a worldwide, royalty‑free license to host, process, and display it as necessary to provide the Service.</li></ul><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">7. Privacy &amp; Data Security</h2><p>Our Privacy Policy explains how we collect, use, share, and protect Customer Data. You are responsible for ensuring your use of the Service complies with all applicable privacy and surveillance laws.</p><p>TagLogger provides tools for lawful location tracking. We do not monitor how you use the Service, but you are solely responsible for ensuring your use and collection of location data comply with privacy and surveillance laws in all jurisdictions where tracking occurs.</p><p>You represent and warrant that you will obtain and maintain all required consents from tracked individuals and provide any legally required notices.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">8. Disclaimers</h2><p>The Service is provided “AS IS” and “AS AVAILABLE,” with all faults. TAGLOGGER AND ITS AFFILIATES, LICENSORS, AND SUPPLIERS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION:</p><ul><li>Any warranty of merchantability or fitness for a particular purpose;</li><li>Any warranty of uninterrupted, error‑free, secure, or virus‑free operation;</li><li>Any warranty as to the accuracy, completeness, or timeliness of location data or other information;</li><li>Any warranty that the Service complies with applicable laws or regulations.</li></ul><p><strong>No Emergency Use.</strong> The Service is not a life‑safety or emergency service and must not be relied upon for emergency response.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">9. Limitation of Liability</h2><p><strong>9.1 EXCLUSION OF DAMAGES.</strong> TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL TAGLOGGER OR ITS AFFILIATES, LICENSORS, OR SUPPLIERS BE LIABLE FOR ANY:</p><ul><li>INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS, LOST DATA, BUSINESS INTERRUPTION, OR GOODWILL), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES;</li><li>DAMAGES ARISING FROM THIRD‑PARTY CLAIMS OR ACTIONS.</li></ul><p><strong>9.2 DAMAGE CAP.</strong> TAGLOGGER’S AGGREGATE LIABILITY FOR ALL CLAIMS ARISING OUT OF OR RELATING TO THE SERVICE, WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, SHALL NOT EXCEED THE GREATER OF:</p><ul><li>(A) THE TOTAL SUBSCRIPTION FEES YOU PAID IN THE THREE (3) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM; OR</li><li>(B) ONE HUNDRED DOLLARS (US $100).</li></ul><p><strong>9.3 FORCE MAJEURE.</strong> TAGLOGGER SHALL NOT BE LIABLE FOR FAILURE OR DELAY IN PERFORMANCE DUE TO CAUSES BEYOND ITS REASONABLE CONTROL, INCLUDING NATURAL DISASTERS, WAR, TERRORISM, RIOTS, EMBARGOES, GOVERNMENT ACTIONS, LABOR DISPUTES, OR INTERNET/NETWORK FAILURES.</p><p><strong>9.4 ALLOCATION OF RISK.</strong> THESE LIMITATIONS ARE AN ESSENTIAL PART OF THE BARGAIN BETWEEN YOU AND TAGLOGGER. YOU ACKNOWLEDGE THAT WITHOUT THEM, THE SUBSCRIPTION FEES WOULD BE SUBSTANTIALLY HIGHER.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">10. Indemnification</h2><p>You agree to indemnify, defend, and hold harmless TagLogger and its officers, directors, employees, and agents from any claims, liabilities, damages, losses, or expenses (including reasonable attorneys’ fees) arising out of:</p><ul><li>Your use of the Service;</li><li>Your violation of these Terms; or</li><li>Any third‑party claim alleging infringement of intellectual property or privacy rights.</li></ul><p>In addition to the above, you specifically agree to indemnify, defend, and hold harmless TagLogger from any claims, investigations, or legal actions arising out of or related to:</p><ul><li>Your failure to obtain consent before tracking any individual or property; or</li><li>Your unlawful or unauthorized use of location data collected through the Service.</li></ul><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">11. Termination</h2><ul><li><strong>By You:</strong> You may cancel your subscription at any time via the dashboard; cancellation is effective at the end of your current billing cycle.</li><li><strong>By Us:</strong> We may suspend or terminate your account for non‑payment, breach of these Terms, compliance with legal or regulatory requirements, or if we detect or receive credible reports of unlawful tracking activity or use without required consent, and we may cooperate with law enforcement.</li><li>Upon termination, your right to access the Service ends immediately, and we may delete your Customer Data.</li></ul><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">12. Changes to Service or Terms</h2><p>We reserve the right to modify, suspend, or discontinue the Service or any part thereof at any time. We may update these Terms by posting the revised version with a new “Last updated” date. Your continued use after changes constitutes acceptance.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">13. Governing Law &amp; Dispute Resolution</h2><p>These Terms are governed by California law (excluding conflict‑of‑law rules). Any dispute arising under these Terms will be resolved by binding arbitration in Los Angeles County under the American Arbitration Association’s rules. You and TagLogger each waive the right to a jury trial and to participate in any class‑action lawsuit.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">14. Legal Compliance</h2><p>TagLogger’s Service is intended for lawful asset‑tracking purposes. TagLogger does not condone or facilitate the use of its technology for stalking, harassment, or unauthorized surveillance. Users are solely responsible for ensuring their use complies with all applicable laws.</p><p><strong>Export Control &amp; Sanctions.</strong> You represent you are not located in, under control of, or a national/resident of any embargoed country or prohibited party list, and you will comply with U.S./EU export control and sanctions laws.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">15. Severability &amp; Waiver</h2><p>If any provision of these Terms is held invalid or unenforceable, the remaining provisions remain in full force. Our failure to enforce any right or provision will not constitute a waiver of future enforcement.</p><hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:32px 0"/><p style="font-size:0.9rem;color:#aaa;text-align:center"><em>End of Terms and Conditions</em></p></div></main></div>
+    <script type="application/ld+json" id="taglogger-public-page-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "TagLogger Terms and Conditions",
+  "url": "https://taglogger.com/terms/",
+  "description": "TagLogger Terms and Conditions for use of the TagLogger AirTag asset tracking platform.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "TagLogger",
+    "url": "https://taglogger.com"
+  }
+}
+    </script>
   </body>
 </html>

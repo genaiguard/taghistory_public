@@ -1,0 +1,1 @@
+import{getFirestore as o,initializeFirestore as t}from"./index.esm-CHF9vulq.js";import{doc as c,getDoc as n,onSnapshot as l}from"./index.esm-CHF9vulq.js";import{a as e}from"./firebaseApp-Dd5idFpi.js";import"./index.esm-CRBP1FzM.js";try{t(e,{experimentalForceLongPolling:!0,useFetchStreams:!1})}catch{}const p=o(e);export{p as db,c as doc,n as getDoc,l as onSnapshot};

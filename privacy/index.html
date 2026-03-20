@@ -2,140 +2,182 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Policy | TagLogger</title>
+    <meta name="title" content="Privacy Policy | TagLogger" />
     <meta name="description" content="TagLogger Privacy Policy describing the collection, use, and protection of data in the TagLogger platform." />
+    <meta name="keywords" content="TagLogger privacy, TagLogger privacy policy, TagLogger data protection" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
     <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/privacy/" />
+    <meta property="og:title" content="Privacy Policy | TagLogger" />
+    <meta property="og:description" content="TagLogger Privacy Policy describing the collection, use, and protection of data in the TagLogger platform." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/privacy/" />
+    <meta name="twitter:title" content="Privacy Policy | TagLogger" />
+    <meta name="twitter:description" content="TagLogger Privacy Policy describing the collection, use, and protection of data in the TagLogger platform." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="canonical" href="https://taglogger.com/privacy/" />
-    <style>
-      :root {
-        --bg: #f8fafc;
-        --surface: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --line: #e2e8f0;
-        --accent: #1d4ed8;
-      }
+    <meta name="generator" content="TagLogger static legal page generator 2026-03-20" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
 
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.55;
-      }
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
 
-      .wrap {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 32px 20px 64px;
-      }
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
 
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 28px;
-      }
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
 
-      h1, h2 { line-height: 1.25; margin: 0 0 14px; }
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.2rem; margin-top: 24px; }
-      p, li { color: var(--muted); }
-      ul { margin: 10px 0 0 20px; }
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
 
-      .meta {
-        color: var(--muted);
-        margin: 0 0 18px;
-      }
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
 
-      .nav {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-bottom: 18px;
-      }
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
 
-      .nav a,
-      .cta {
-        display: inline-block;
-        text-decoration: none;
-        color: var(--accent);
-        border: 1px solid rgba(29, 78, 216, 0.25);
-        background: rgba(29, 78, 216, 0.06);
-        border-radius: 999px;
-        padding: 8px 12px;
-        font-size: 0.95rem;
-      }
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
 
-      .cta {
-        margin-top: 20px;
-        background: var(--accent);
-        color: #ffffff;
-        border-color: var(--accent);
-      }
-    </style>
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-BdgNwC0i.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-CCrmdgli.css">
   </head>
   <body>
-    <main class="wrap">
-      <article class="card">
-        <nav class="nav" aria-label="Legal navigation">
-          <a href="/">Home</a>
-          <a href="/terms/">Terms and Conditions</a>
-          <a href="/contact/">Contact</a>
-        </nav>
-
-        <h1>TagLogger Privacy Policy</h1>
-        <p class="meta"><strong>Effective date:</strong> October 8, 2025</p>
-
-        <h2>1. Information We Collect</h2>
-        <ul>
-          <li>Location data (latitude, longitude, and timestamps) related to your tracked assets.</li>
-          <li>Account identifiers such as email address and authentication details.</li>
-          <li>Usage and operational telemetry needed to support and improve the service.</li>
-        </ul>
-
-        <h2>2. How We Use Information</h2>
-        <ul>
-          <li>Provide platform features such as current location, history, geofencing, and alerts.</li>
-          <li>Operate account, billing, support, and service reliability workflows.</li>
-          <li>Improve product quality and troubleshoot issues.</li>
-        </ul>
-
-        <h2>3. Lawful Use Responsibility</h2>
-        <p>You are responsible for ensuring your tracking activities comply with applicable privacy and surveillance laws, including obtaining required consent and notices.</p>
-
-        <h2>4. How We Share Information</h2>
-        <p>We do not sell your location data. We may share data only when needed to operate the service, comply with legal obligations, or protect rights and safety.</p>
-
-        <h2>5. Data Retention</h2>
-        <p>We retain data while your account is active or as needed for service operation, legal compliance, and fraud prevention. We honor deletion requests as required by law.</p>
-
-        <h2>6. Security</h2>
-        <p>We use technical and organizational safeguards to protect data in transit and at rest. No system can be guaranteed fully risk-free.</p>
-
-        <h2>7. International Processing</h2>
-        <p>Your data may be processed in regions where TagLogger and service providers operate, subject to applicable legal safeguards.</p>
-
-        <h2>8. Children</h2>
-        <p>The service is not intended for users under 18 years old.</p>
-
-        <h2>9. Your Rights</h2>
-        <ul>
-          <li>Access and review account information.</li>
-          <li>Request correction or deletion where legally available.</li>
-          <li>Object to certain data processing activities where applicable.</li>
-        </ul>
-
-        <h2>10. Updates</h2>
-        <p>We may update this policy and publish the revised version with an updated effective date.</p>
-
-        <h2>11. Contact</h2>
-        <p>If you have data privacy questions, use the contact page.</p>
-
-        <a class="cta" href="/contact/">Go to Contact</a>
-      </article>
-    </main>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><main id="main-content" tabindex="-1" class="legal-page" style="min-height:100vh;background:var(--color-bg);color:var(--color-text);font-family:system-ui, -apple-system, sans-serif;padding:80px 0 40px 0"><div style="max-width:800px;margin:0 auto;padding:0 20px"><h1 style="color:var(--color-accent);font-weight:700;font-size:2.5rem;margin-bottom:32px">TagLogger Privacy Policy</h1><p style="font-size:0.9rem;color:var(--color-text-muted);margin-bottom:32px"><strong>Effective Date: October 8, 2025</strong></p><p style="font-size:0.9rem;color:var(--color-text-muted);margin-bottom:32px"><strong>Version: 1.0</strong></p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Introduction</h2><p>At TagLogger, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our services. By using TagLogger, you agree to the practices described in this policy.</p><p><strong>Data Controller:</strong> TagLogger is the data controller responsible for your personal information. For any questions or concerns about this policy or your data, please contact us via the in-app support form or through our Contact Us page.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Information We Collect</h2><p>We collect the following types of information to provide and improve our services:</p><ul><li><strong>Location Data:</strong> Latitude, longitude, and timestamps associated with your AirTags for location history and tracking features.</li><li><strong>User Identification:</strong> Account details like your email address or username to link location data to your account.</li><li><strong>Cookies and Tracking Technologies:</strong> Used to authenticate users, remember preferences, and analyze website usage.</li></ul><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">How We Use Your Information</h2><p>We use your information to:</p><ul><li>Provide the TagLogger service, including location history, geofencing, inventory management, and interactive timelines.</li><li>Improve our services, troubleshoot issues, and develop new features.</li><li>Communicate with you about your account, updates, or support matters.</li></ul><p>TagLogger processes location data solely on behalf of the account holder and for the purpose of providing the tracking features you request.</p><p>You are responsible for ensuring that any collection or sharing of location data with respect to other individuals complies with applicable privacy and surveillance laws, including obtaining consent where required.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">How We Share Your Information</h2><p>We do not share your location data with third parties, except as follows:</p><ul><li><strong>Trusted Service Providers:</strong> We may share data with trusted vendors (e.g., for hosting, analytics, or payment processing) who are bound by confidentiality obligations and use your data only to perform services for us.</li><li><strong>Legal Requirements:</strong> When required by law, such as a subpoena or court order.</li><li><strong>Protection of Rights:</strong> To protect TagLogger, our users, or others.</li><li><strong>With Your Consent:</strong> If you explicitly agree to share your data.</li></ul><p>We may suspend or terminate access to the Service or cooperate with law enforcement if we detect or receive credible reports of unlawful tracking activity.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Your Choices and Rights</h2><p>You can:</p><ul><li><strong>Access:</strong> View your data through your account dashboard.</li><li><strong>Correct:</strong> Update inaccuracies in your account settings.</li><li><strong>Delete:</strong> Request data deletion, subject to legal retention obligations.</li><li><strong>Object:</strong> Opt out of certain data processing where permitted by law.</li></ul><p>To exercise these rights, use the in-app support form or visit our Contact Us page.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Security</h2><p>We use industry-standard encryption, access controls, and secure servers to protect your data. However, no system is fully immune to risks.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">International Data Transfers</h2><p>Your data may be processed in other countries, with safeguards to comply with applicable laws.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Children’s Privacy</h2><p>Our services are not intended for anyone under 18. We do not knowingly collect data from individuals under 18, and we will delete such data if discovered.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Business Use</h2><p>If you use TagLogger for business (e.g., tracking shipments), you must comply with privacy laws and obtain necessary consents.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Data Retention</h2><p>We keep your data while your account is active or as needed for the service. Upon deletion requests, we remove it unless legally required to retain it.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Cookies and Tracking Technologies</h2><p>Cookies help with authentication, preferences, and analytics. Manage them via your browser settings, though this may limit functionality.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Changes to This Policy</h2><p>We may update this policy and will notify you of significant changes via our website. Continued use after updates implies acceptance.</p><h2 style="color:var(--color-text);font-weight:600;font-size:1.5rem;margin-top:32px">Contact Us</h2><p>For questions or requests, reach us via the in-app support form or Contact Us.</p></div></main></div>
+    <script type="application/ld+json" id="taglogger-public-page-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "TagLogger Privacy Policy",
+  "url": "https://taglogger.com/privacy/",
+  "description": "TagLogger Privacy Policy describing the collection, use, and protection of data in the TagLogger platform.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "TagLogger",
+    "url": "https://taglogger.com"
+  }
+}
+    </script>
   </body>
 </html>
