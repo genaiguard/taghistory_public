@@ -6,5 +6,8 @@ Disallow: /settings
 Disallow: /map
 Disallow: /login
 
+# AI content usage preferences (contentsignals.org)
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
+
 # Sitemap
 Sitemap: https://taglogger.com/sitemap.xml
