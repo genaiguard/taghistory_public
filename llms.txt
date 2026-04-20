@@ -1,0 +1,28 @@
+# TagLogger
+
+> AirTag-based asset tracking for operations teams. Track tools, vehicles, and field equipment with location history, geofence alerts, and inventory workflows — without heavy GPS hardware overhead.
+
+TagLogger ships pre-configured AirTag hardware (not standard consumer AirTags) with a web platform used by teams in construction, logistics, healthcare, equipment rental, and recycling. An independent service, not affiliated with Apple Inc.
+
+## Hardware
+
+- [Standard Tag — $15](https://taglogger.com/#pricing): compact, up to 1-year battery (CR2032)
+- [Standard Tag + Magnetic Holder — $21](https://taglogger.com/#pricing): magnetic mount for tools and vehicles
+- [Tag + Extended Battery Case — $45](https://taglogger.com/#pricing): up to 10-year battery on two AA cells
+
+Monthly subscription starts at $10. Free U.S. shipping.
+
+## Platform
+
+- [Pricing](https://taglogger.com/#pricing)
+- [How it works](https://taglogger.com/#how-it-works)
+- [Platform features](https://taglogger.com/#platform-features)
+- [Use cases](https://taglogger.com/#use-cases)
+- [FAQ](https://taglogger.com/#faq)
+- [Contact sales](https://taglogger.com/contact/)
+- [Personal-use waitlist](https://taglogger.com/personal-use/)
+
+## Legal
+
+- [Privacy Policy](https://taglogger.com/privacy/)
+- [Terms and Conditions](https://taglogger.com/terms/)
