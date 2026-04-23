@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirTag Data Export and API Integration: CSV, JSON, ERP/CMMS | TagLogger</title>
+    <meta name="title" content="AirTag Data Export and API Integration: CSV, JSON, ERP/CMMS | TagLogger" />
+    <meta name="description" content="Export AirTag location history as CSV/JSON or pull via API for ERP, CMMS, TMS, and FSM integration. Practical patterns for turning AirTag data into operational workflow." />
+    <meta name="keywords" content="AirTag Data Export &amp; API, resources, AirTag tracking, TagLogger" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/resources/airtag-data-export-and-api-integration/" />
+    <meta property="og:title" content="AirTag Data Export and API Integration: CSV, JSON, ERP/CMMS | TagLogger" />
+    <meta property="og:description" content="Export AirTag location history as CSV/JSON or pull via API for ERP, CMMS, TMS, and FSM integration. Practical patterns for turning AirTag data into operational workflow." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/resources/airtag-data-export-and-api-integration/" />
+    <meta name="twitter:title" content="AirTag Data Export and API Integration: CSV, JSON, ERP/CMMS | TagLogger" />
+    <meta name="twitter:description" content="Export AirTag location history as CSV/JSON or pull via API for ERP, CMMS, TMS, and FSM integration. Practical patterns for turning AirTag data into operational workflow." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href="https://taglogger.com/resources/airtag-data-export-and-api-integration/" />
+    <meta name="generator" content="TagLogger static public content generator 2026-04-23" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
+
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
+
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
+
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
+
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
+
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
+
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
+
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
+
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-DoEGTZ0e.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-Cdac8F7h.css">
+  </head>
+  <body>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><main id="main-content" class="industry-solution-page" role="main" tabindex="-1"><section class="industry-solution-hero" aria-labelledby="industry-solution-page-title"><div class="industry-solution-hero-noise" aria-hidden="true"></div><div class="industry-solution-container"><nav aria-label="Breadcrumb" class="industry-solution-breadcrumb"><ol class="industry-solution-breadcrumb-list"><li class="industry-solution-breadcrumb-item"><a href="/" data-discover="true">Home</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><a href="/#resources" data-discover="true">Resources</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><span aria-current="page">AirTag Data Export &amp; API</span></li></ol></nav><p class="industry-solution-eyebrow">AirTag Data Export &amp; API</p><h1 id="industry-solution-page-title" class="industry-solution-title">AirTag Location Data Export and API Integration</h1><p class="industry-solution-subtitle">AirTag location data is only as useful as the systems that act on it. TagLogger supports CSV/JSON export and API access so AirTag location history can flow into ERP, CMMS, TMS, and custom dashboards — not sit trapped in a separate tracking UI.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>What TagLogger exports</h2></div><div><ul><li>Current and historical location for every linked AirTag (lat/lon + timestamp)</li><li>Geofence entry and exit events with timestamps</li><li>Stale-asset reports — assets that haven&#x27;t moved in configurable time windows</li><li>Asset metadata — name, color, category, assigned team</li><li>Activity feed — complete event log for each AirTag over any selected range</li><li>Low-battery status and AirTag reporting cadence</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Export formats</h2></div><div><p>CSV is the most common export format — compatible with Excel, Google Sheets, and virtually every business system. CSV export from TagLogger includes per-AirTag columns for timestamp, latitude, longitude, asset name, and any geofence events associated with that row.</p><p>JSON export preserves the full nested structure of the data including geofence metadata, asset category, and event types. JSON is useful for direct programmatic ingestion into scripts, data warehouses, and custom integrations.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Common integration patterns</h2></div><div><ul><li>Daily CSV snapshot — scheduled export dropped into a shared drive or ERP folder for batch reconciliation</li><li>Weekly audit report — stale-asset CSV plus activity summary for ops review</li><li>Geofence webhook — TagLogger fires an HTTP webhook when a geofence event happens, posting to an FSM or TMS endpoint</li><li>Live API polling — custom dashboards or monitoring tools pull location data on a cadence (typically every 1–5 minutes)</li><li>Event-driven automation — webhook triggers downstream workflow (Slack alerts, ticket creation, inventory adjustments)</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Integration targets — ERP, CMMS, TMS, FSM</h2></div><div><p>ERP systems (NetSuite, SAP, Oracle, Dynamics): typically ingest AirTag location history as a custom asset record with a geolocation field, updated via daily CSV imports or API. Common use: reconcile physical asset location against ERP-recorded location.</p><p>CMMS (Maximo, eMaint, Fiix, UpKeep): AirTag location feeds into the asset location attribute to support PM scheduling (locate asset for scheduled maintenance without floor-walking), and into work order asset linkage (technician dispatched to the current asset location).</p><p>TMS/WMS (Oracle TM, SAP TM, Blue Yonder, Manhattan): geofence events post as status updates on shipments; trailer and container location feeds into yard management reports.</p><p>FSM (ServiceTitan, Housecall Pro, Jobber, FieldEdge): AirTag location of service vehicles and toolkits feeds into job dispatch decisions; geofence arrival events post as automated customer notifications.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>API access basics</h2></div><div><p>TagLogger&#x27;s API provides programmatic access to the same data shown in the web UI. Authentication is API-key-based, scoped per workspace. Common endpoints: list AirTags, get latest location for an AirTag, get location history for an AirTag over a time range, list geofences and geofence events, get asset metadata.</p><p>For high-frequency polling, most integrations settle on a 1–5 minute cadence — matching the practical update cadence of the Find My network. Higher-frequency polling doesn&#x27;t produce more data because the underlying relay cadence is the rate-limiting step.</p><p>For event-driven integrations, webhook subscriptions are more efficient than polling. Subscribe to geofence entry/exit events and have TagLogger post to your endpoint the moment a relevant event fires.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Common export and integration use cases</h2></div><div><ul><li>Audit reports — monthly or quarterly exports showing asset custody and movement for internal or external audits</li><li>Insurance documentation — CSV export of location history for loss claims and theft cases</li><li>Billing reconciliation — matching tracked asset location against contracted rental dates or service visits</li><li>Inventory count automation — periodic fleet snapshots into inventory management systems</li><li>Compliance logs — time-stamped location history for regulatory requirements (SOX asset controls, HIPAA device tracking)</li><li>Custom dashboards — unified views across AirTag data plus other operational data (ERP, CRM, telemetry)</li><li>Analytics pipelines — loading AirTag history into BigQuery/Snowflake/Redshift for asset utilization analysis</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Security considerations for exports and API access</h2></div><div><p>AirTag location data is valuable — it reveals where assets (and often, where people) are and have been. Treat export and API data with appropriate access controls. Restrict API keys to the minimum permission scope needed. Store API keys in a secrets manager, not in plain-text configs. Log API access for audit.</p><p>For CSV exports shared externally (with insurance adjusters, police, customers in disputes), share only the necessary time window and assets rather than a fleet-wide dump. TagLogger supports per-asset and time-bounded exports specifically for this.</p><p>Customers in regulated industries (healthcare, financial services) often route TagLogger export/API data through their compliance platform rather than directly into end systems. This is a reasonable pattern that TagLogger&#x27;s export format supports.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Getting started with exports and API</h2></div><div><p>Start with CSV export. It requires no development work, works in any spreadsheet tool, and covers most audit and reconciliation use cases. Most TagLogger customers use CSV for their first 3–6 months and only move to API integration once they hit a specific automation need.</p><p>For API integration, the practical first target is the geofence webhook — because it gives event-driven signals without requiring polling infrastructure. A webhook endpoint plus a few lines of logic can automate a significant share of the workflow (Slack alerts, ticket creation, status updates) without needing full custom integration.</p><p>Full ERP/CMMS integration is a larger project and usually comes later. By the time that&#x27;s needed, the operational patterns around AirTag tracking are well-understood, and the integration targets specific data flows rather than &quot;connect everything&quot;.</p></div></div></div></section><section class="faq-section" role="region" aria-labelledby="industry-solution-faq-title"><div class="faq-content"><h2 id="industry-solution-faq-title" class="faq-title">Frequently asked questions</h2><div class="faq-list" role="list"><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-0"><span class="faq-row-question-text">Can I export AirTag location data from TagLogger?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-row-question-text">Does TagLogger have an API?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-2"><span class="faq-row-question-text">Can I integrate TagLogger with our ERP?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-3"><span class="faq-row-question-text">Can I feed AirTag data into our CMMS for PM scheduling?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-row-question-text">Does TagLogger support webhooks for geofence events?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-row-question-text">How fresh is the location data in an API pull?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-row-question-text">Can I export AirTag data for insurance or police reports?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-7"><span class="faq-row-question-text">Is the API documented?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-8"><span class="faq-row-question-text">Can we integrate with ServiceTitan or Jobber?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-9"><span class="faq-row-question-text">How do we handle API key security?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class="industry-solution-cta-box "><h2>Get AirTag data into the systems that run your operation</h2><p>CSV export, JSON export, API access, and webhooks — so AirTag location history powers ERP, CMMS, TMS, FSM, and custom workflows without data silos.</p><div class="industry-solution-cta-actions"><a class="industry-solution-cta-primary" href="/#pricing" data-discover="true">Get Started</a><a class="industry-solution-cta-secondary" href="/#get-in-touch" data-discover="true">Get in Touch</a></div></div></div></section><section class="industry-solution-section industry-solution-related" aria-labelledby="related-links-title"><div class="industry-solution-container"><h2 id="related-links-title">Related Pages</h2><div class="industry-solution-related-group"><h3>Resources</h3><div class="industry-solution-chip-grid"><a class="industry-solution-chip-link" href="/resources/airtag-inventory-management/" data-discover="true">AirTag Inventory Management</a><a class="industry-solution-chip-link" href="/resources/set-up-airtag-business/" data-discover="true">Set Up AirTag for Business</a><a class="industry-solution-chip-link" href="/resources/multiple-airtags-fleet/" data-discover="true">Managing Multiple AirTags</a><a class="industry-solution-chip-link" href="/resources/airtag-alerts-and-notifications/" data-discover="true">AirTag Alerts &amp; Notifications</a></div></div></div></section></main></div>
+    <script type="application/ld+json" id="taglogger-industry-solution-webpage">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AirTag Location Data Export and API Integration",
+  "description": "Export AirTag location history as CSV/JSON or pull via API for ERP, CMMS, TMS, and FSM integration. Practical patterns for turning AirTag data into operational workflow.",
+  "url": "https://taglogger.com/resources/airtag-data-export-and-api-integration/"
+}
+    </script>
+        <script type="application/ld+json" id="taglogger-industry-solution-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I export AirTag location data from TagLogger?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. TagLogger supports CSV and JSON export of current locations, historical location data, geofence events, and asset metadata. Export works per-asset, across a fleet, or bounded to a specific time range."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does TagLogger have an API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The API provides programmatic access to the same data shown in the web UI — AirTag lists, current and historical locations, geofence events, asset metadata. Authentication is API-key-based, scoped per workspace."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I integrate TagLogger with our ERP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, via CSV import or direct API integration. Most ERP integrations ingest AirTag location history as a daily CSV snapshot for asset reconciliation. For real-time integrations, API polling or webhook subscriptions are more efficient."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I feed AirTag data into our CMMS for PM scheduling?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. CMMS integrations typically update the asset's \"current location\" attribute from TagLogger, supporting PM workflows (locate asset for scheduled maintenance) and work order dispatch (send tech to asset location). CSV import or API both work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does TagLogger support webhooks for geofence events?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Subscribe to geofence entry and exit events and TagLogger posts to your endpoint the moment a relevant event fires. Webhooks are more efficient than polling for event-driven automation (Slack alerts, ticket creation, customer notifications)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fresh is the location data in an API pull?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As fresh as the Find My network delivers. In populated areas, typical AirTag reports are every 1–5 minutes. Polling faster than that doesn't produce more data because the relay cadence is the rate-limiting step."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export AirTag data for insurance or police reports?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Time-stamped CSV or JSON export of location history is formatted for insurance claims and police reports. Export only the relevant time window and assets rather than a fleet-wide dump."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the API documented?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. TagLogger provides API documentation for teams integrating AirTag data into their systems. For specific integration patterns not covered in the docs, contact TagLogger for guidance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can we integrate with ServiceTitan or Jobber?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No native integration today, but webhook- or CSV-based integration works. Common pattern: AirTag geofence arrival events fire a webhook that creates or updates a job status in the FSM. For deeper integration, the API is available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do we handle API key security?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "API keys should be stored in a secrets manager (not plain-text configs), scoped to the minimum permission needed, and rotated periodically. TagLogger logs API access for audit. For highly regulated deployments, route API data through the compliance platform rather than directly into end systems."
+      }
+    }
+  ]
+}
+    </script>
+  </body>
+</html>

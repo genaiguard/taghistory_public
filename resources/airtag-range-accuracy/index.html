@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirTag Range and Accuracy: How Far, How Precise | TagLogger</title>
+    <meta name="title" content="AirTag Range and Accuracy: How Far, How Precise | TagLogger" />
+    <meta name="description" content="AirTag range, accuracy, and coverage explained. How Bluetooth relay works, how precise AirTag locations are, and why it often matters less than you think." />
+    <meta name="keywords" content="AirTag Range &amp; Accuracy, resources, AirTag tracking, TagLogger" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/resources/airtag-range-accuracy/" />
+    <meta property="og:title" content="AirTag Range and Accuracy: How Far, How Precise | TagLogger" />
+    <meta property="og:description" content="AirTag range, accuracy, and coverage explained. How Bluetooth relay works, how precise AirTag locations are, and why it often matters less than you think." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/resources/airtag-range-accuracy/" />
+    <meta name="twitter:title" content="AirTag Range and Accuracy: How Far, How Precise | TagLogger" />
+    <meta name="twitter:description" content="AirTag range, accuracy, and coverage explained. How Bluetooth relay works, how precise AirTag locations are, and why it often matters less than you think." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href="https://taglogger.com/resources/airtag-range-accuracy/" />
+    <meta name="generator" content="TagLogger static public content generator 2026-04-23" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
+
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
+
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
+
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
+
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
+
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
+
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
+
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
+
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-DoEGTZ0e.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-Cdac8F7h.css">
+  </head>
+  <body>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><main id="main-content" class="industry-solution-page" role="main" tabindex="-1"><section class="industry-solution-hero" aria-labelledby="industry-solution-page-title"><div class="industry-solution-hero-noise" aria-hidden="true"></div><div class="industry-solution-container"><nav aria-label="Breadcrumb" class="industry-solution-breadcrumb"><ol class="industry-solution-breadcrumb-list"><li class="industry-solution-breadcrumb-item"><a href="/" data-discover="true">Home</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><a href="/#resources" data-discover="true">Resources</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><span aria-current="page">AirTag Range &amp; Accuracy</span></li></ol></nav><p class="industry-solution-eyebrow">AirTag Range &amp; Accuracy</p><h1 id="industry-solution-page-title" class="industry-solution-title">AirTag Range and Accuracy: How Far and How Precise</h1><p class="industry-solution-subtitle">AirTags do not have a fixed &quot;range&quot; the way walkie-talkies do. Here is how AirTag range and accuracy actually work through the Find My network, what affects them, and what level of precision you can rely on for tracking.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>How far does an AirTag work?</h2></div><div><p>There is no single answer — AirTag range is relay-based, not point-to-point. An AirTag broadcasts a Bluetooth Low Energy (BLE) signal that any nearby Apple device can receive. That device silently forwards the AirTag&#x27;s location to Apple&#x27;s servers, which the owner then reads through Find My or TagLogger.</p><p>The practical range is: &quot;wherever any Apple device is within ~30 feet (10 meters) of the AirTag.&quot; That is the BLE range from AirTag to relay device. After that, the relay device uses its own internet connection to upload the location report — so effectively, AirTag range is global as long as any Apple device is near it at some point.</p><p>In populated areas, this makes AirTag range effectively continuous. In remote areas with no Apple-device foot traffic, AirTag range collapses to zero until someone with an iPhone passes by.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>AirTag Bluetooth range: the 30-foot rule</h2></div><div><p>The raw AirTag-to-device Bluetooth range is about 30 feet / 10 meters in ideal conditions. In practice this shifts based on walls, metal, and interference.</p><p>Through a single sheetrock wall: about 20–30 feet. Through multiple walls, through metal enclosures, or inside thick storage containers: range drops significantly. An AirTag buried deep inside a sealed metal toolbox or inside a metal shipping container may only be detectable when a relay device is very close.</p><p>This is why placement matters. An AirTag on the outside of a toolbox or near a seam/opening reports much more often than one sealed deep inside. Teams optimizing for reliable reporting usually think about Apple-device foot traffic patterns near their assets.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>AirTag location accuracy</h2></div><div><ul><li>Dense urban areas (many Apple devices near the AirTag): typically 10–30 meters</li><li>Suburban / office / mixed environments: typically 20–50 meters</li><li>Less populated areas with few relay devices: 50–200 meters, sometimes more</li><li>Truly remote locations: the latest reported location may be hours or days old</li><li>Precision Finding (when the owner is within ~30 feet): sub-meter using U1/U2 ultra-wideband</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>What affects AirTag accuracy</h2></div><div><p>The biggest factor is the density of Apple devices in the Find My network near the AirTag. More relay devices = more location reports = more accurate triangulation across reports.</p><p>Indoor vs outdoor matters: GPS-free indoor areas benefit most from AirTag tracking (vs GPS trackers, which struggle indoors). AirTags report equally well indoors and outdoors as long as relay devices are present.</p><p>Signal obstruction (walls, metal, vehicles) reduces the number of devices that can pick up the AirTag — so a poorly-placed AirTag will have less accurate and less frequent reports.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Why raw accuracy often matters less than you expect</h2></div><div><p>Most business tracking is not about &quot;which square meter is this thing on?&quot; — it is about &quot;which yard, which site, which building?&quot;. For that question, 10–50 meter accuracy is more than enough.</p><p>For &quot;is this toolbox at the job site or back at the shop?&quot;, AirTag accuracy is perfect. For &quot;which parking space is this truck in?&quot;, a GPS tracker is more reliable. For &quot;which aisle of the warehouse is this pallet in?&quot;, AirTag placement and a generous geofence are usually the answer.</p><p>The practical SEO-friendly question is not &quot;how accurate is the AirTag?&quot; but &quot;will the accuracy be good enough for what I actually need to know?&quot; — and for most operational use cases, the answer is yes.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>AirTag range in specific contexts</h2></div><div><ul><li>In a busy city: continuous reporting, location refreshes every few minutes</li><li>In a suburb: reporting every 15 minutes to a few hours, accuracy 20–50 meters</li><li>At a job site with iPhones present: strong reporting throughout the workday</li><li>Overnight at a residential address: usually one report when a resident passes near the AirTag</li><li>In a warehouse without workers: gaps in reporting until someone with an iPhone walks through</li><li>On the highway: reports as the AirTag passes near other vehicles and devices</li><li>At sea, in wilderness, or in deep rural: reports are rare or absent</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>How to improve AirTag reporting reliability</h2></div><div><ul><li>Place AirTags on the outside or near openings of enclosures — not deep inside metal</li><li>Use multiple AirTags on high-value items so one stays exposed if the other is buried</li><li>Target assets that pass through populated areas rather than ones that sit in remote storage</li><li>For items in low-density areas, set expectations around reporting gaps upfront</li><li>For reliable telematics in truly remote areas, use a GPS tracker instead of an AirTag</li><li>Pair AirTags with TagLogger to see the full reporting history, not just the latest pin — which makes gaps much easier to diagnose</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>AirTag range vs GPS tracker range</h2></div><div><p>GPS trackers have &quot;range&quot; equal to wherever cellular service exists. That is broader than AirTag&#x27;s relay-network coverage in genuinely remote areas, and equal in most populated regions.</p><p>But GPS trackers pay for that range with battery life (hours vs a year), cost ($150+ vs $29), and ongoing subscription fees. For assets that live in populated areas, AirTag range is effectively identical to GPS range for the questions most businesses care about.</p><p>See the AirTag vs GPS tracker comparison for a deeper look at when each is the right choice.</p></div></div></div></section><section class="faq-section" role="region" aria-labelledby="industry-solution-faq-title"><div class="faq-content"><h2 id="industry-solution-faq-title" class="faq-title">Frequently asked questions</h2><div class="faq-list" role="list"><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-0"><span class="faq-row-question-text">How far does an AirTag work?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-row-question-text">What is the Bluetooth range of an AirTag?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-2"><span class="faq-row-question-text">How accurate is an AirTag?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-3"><span class="faq-row-question-text">Does an AirTag work without Wi-Fi or cellular near it?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-row-question-text">Does AirTag work indoors?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-row-question-text">Does AirTag work in a car or on the highway?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-row-question-text">How often does an AirTag update its location?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-7"><span class="faq-row-question-text">Why is my AirTag location inaccurate?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-8"><span class="faq-row-question-text">Can AirTag tracking be reliable at a remote job site?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-9"><span class="faq-row-question-text">Does AirTag accuracy improve over time?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class="industry-solution-cta-box "><h2>See what AirTag range and accuracy look like in practice</h2><p>TagLogger captures every AirTag location report so you can see the actual reporting cadence and accuracy for your specific deployment — not theoretical specs.</p><div class="industry-solution-cta-actions"><a class="industry-solution-cta-primary" href="/#pricing" data-discover="true">Get Started</a><a class="industry-solution-cta-secondary" href="/#get-in-touch" data-discover="true">Get in Touch</a></div></div></div></section><section class="industry-solution-section industry-solution-related" aria-labelledby="related-links-title"><div class="industry-solution-container"><h2 id="related-links-title">Related Pages</h2><div class="industry-solution-related-group"><h3>Resources</h3><div class="industry-solution-chip-grid"><a class="industry-solution-chip-link" href="/resources/airtag-vs-gps-tracker/" data-discover="true">AirTag vs GPS Tracker</a><a class="industry-solution-chip-link" href="/resources/history-playback/" data-discover="true">AirTag Location History</a><a class="industry-solution-chip-link" href="/resources/airtag-battery-life/" data-discover="true">AirTag Battery Life</a></div></div></div></section></main></div>
+    <script type="application/ld+json" id="taglogger-industry-solution-webpage">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AirTag Range and Accuracy: How Far and How Precise",
+  "description": "AirTag range, accuracy, and coverage explained. How Bluetooth relay works, how precise AirTag locations are, and why it often matters less than you think.",
+  "url": "https://taglogger.com/resources/airtag-range-accuracy/"
+}
+    </script>
+        <script type="application/ld+json" id="taglogger-industry-solution-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How far does an AirTag work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AirTag range is relay-based. The AirTag-to-device Bluetooth range is about 30 feet / 10 meters, but the AirTag's location is then relayed globally via Apple devices on the internet. Effective range is \"wherever any Apple device is within 30 feet of the AirTag at some point\"."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Bluetooth range of an AirTag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About 30 feet (10 meters) in ideal conditions. Walls, metal, and interference reduce that — an AirTag inside a metal container may only be detectable when a relay device is very close."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate is an AirTag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In dense urban areas, typically 10–30 meters. In suburbs and office areas, 20–50 meters. In less populated areas, accuracy widens to 50–200 meters. Precision Finding with the owner's iPhone within 30 feet can be accurate to under a meter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does an AirTag work without Wi-Fi or cellular near it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The AirTag itself does not need Wi-Fi or cellular. The Apple device that relays the AirTag's signal does — it uses its own internet connection to upload the location report. If no Apple device with internet is near the AirTag, the location doesn't update until one passes by."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does AirTag work indoors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, AirTag often works better indoors than GPS trackers, because AirTag location is derived from nearby Apple devices (which are usually indoors with people) rather than GPS satellites (which struggle inside buildings). Indoor AirTag range depends on how many Apple devices pass through the space."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does AirTag work in a car or on the highway?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. AirTags report frequently on highways because nearby vehicles with Apple devices relay the signal as they pass. Urban highways tend to produce especially frequent reports."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often does an AirTag update its location?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no fixed interval — updates happen whenever a nearby Apple device picks up the signal. In dense areas this can be every minute or two. In quiet areas it may be every few hours. TagLogger captures every update so the actual reporting cadence is visible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my AirTag location inaccurate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The most common reasons: the AirTag is in a location with few Apple devices nearby, it is inside a metal enclosure that reduces BLE range, or the most recent relay came from an Apple device far away. Moving the AirTag to a more exposed placement usually improves accuracy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can AirTag tracking be reliable at a remote job site?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on Apple-device foot traffic. A job site with crew who carry iPhones will see strong AirTag reporting during work hours. A site with no Apple-device presence will see very sparse reports. For consistently remote tracking, a GPS tracker is often a better fit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does AirTag accuracy improve over time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not automatically, but more reports allow TagLogger to surface a more accurate picture through location history — a single pin might be off by 50 meters, but 10 consecutive reports at the same address is much higher confidence. This is one reason AirTag location history matters more than single-pin accuracy for most use cases."
+      }
+    }
+  ]
+}
+    </script>
+  </body>
+</html>

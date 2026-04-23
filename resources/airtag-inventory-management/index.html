@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirTag Inventory Management: Check-In, Check-Out, and Loss Prevention | TagLogger</title>
+    <meta name="title" content="AirTag Inventory Management: Check-In, Check-Out, and Loss Prevention | TagLogger" />
+    <meta name="description" content="Use AirTags as the hardware layer for asset inventory management — automatic location updates, check-in/check-out workflows, loss prevention, and CSV export." />
+    <meta name="keywords" content="AirTag Inventory Management, resources, AirTag tracking, TagLogger" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/resources/airtag-inventory-management/" />
+    <meta property="og:title" content="AirTag Inventory Management: Check-In, Check-Out, and Loss Prevention | TagLogger" />
+    <meta property="og:description" content="Use AirTags as the hardware layer for asset inventory management — automatic location updates, check-in/check-out workflows, loss prevention, and CSV export." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/resources/airtag-inventory-management/" />
+    <meta name="twitter:title" content="AirTag Inventory Management: Check-In, Check-Out, and Loss Prevention | TagLogger" />
+    <meta name="twitter:description" content="Use AirTags as the hardware layer for asset inventory management — automatic location updates, check-in/check-out workflows, loss prevention, and CSV export." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href="https://taglogger.com/resources/airtag-inventory-management/" />
+    <meta name="generator" content="TagLogger static public content generator 2026-04-23" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
+
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
+
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
+
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
+
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
+
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
+
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
+
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
+
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-DoEGTZ0e.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-Cdac8F7h.css">
+  </head>
+  <body>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><main id="main-content" class="industry-solution-page" role="main" tabindex="-1"><section class="industry-solution-hero" aria-labelledby="industry-solution-page-title"><div class="industry-solution-hero-noise" aria-hidden="true"></div><div class="industry-solution-container"><nav aria-label="Breadcrumb" class="industry-solution-breadcrumb"><ol class="industry-solution-breadcrumb-list"><li class="industry-solution-breadcrumb-item"><a href="/" data-discover="true">Home</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><a href="/#resources" data-discover="true">Resources</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><span aria-current="page">AirTag Inventory Management</span></li></ol></nav><p class="industry-solution-eyebrow">AirTag Inventory Management</p><h1 id="industry-solution-page-title" class="industry-solution-title">AirTag-Based Asset Inventory Management</h1><p class="industry-solution-subtitle">AirTags turn asset inventory management into a passive, always-on workflow. No more hand-scanned RFID tags, no more manual spreadsheets at shift change — every AirTag-tagged asset reports its own location, automatically, across every site.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Why manual asset inventory fails</h2></div><div><p>Most organizations track assets with spreadsheets, sign-out logs, or a lightweight CMMS. These systems depend on people remembering to log check-ins and check-outs. In practice, the discipline never holds: a rushed crew grabs a tool without signing it out, a shift ends before the log gets updated, and within days the inventory record no longer matches reality.</p><p>The result is the quietest kind of asset loss: not dramatic theft, but the accumulation of misplacement, double-purchasing (because the team &quot;couldn&#x27;t find&quot; an existing asset), and write-offs of assets nobody can track down. Industry studies suggest 10–20% of mobile asset inventory is out of sync with reality at any given time.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>How AirTags change the asset inventory workflow</h2></div><div><p>AirTags make inventory passive. Instead of relying on people to log asset movement, each tagged asset reports its own location continuously. The inventory record becomes &quot;wherever the AirTag says it is right now&quot; — not whatever the last manual entry claimed.</p><p>Check-in and check-out workflows still exist when the operation needs them (rental returns, tool-crib-style controlled items, compliance workflows), but they become verification steps rather than the primary data source. The location of the asset is always known regardless of whether someone remembered to sign it out.</p><p>TagLogger provides the inventory management platform on top of AirTag hardware: named assets, categorized views, team access, location history, geofence alerts, and CSV/JSON export for integration with ERP or CMMS systems.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Inventory workflows TagLogger supports</h2></div><div><ul><li>Real-time location view for every tagged asset across every site</li><li>Check-in and check-out signals when assets cross geofence boundaries (yard, tool crib, controlled storage)</li><li>Stale-asset reports — items that haven&#x27;t moved in 7, 14, 30+ days</li><li>Historical audit trail for any asset — every location report, timestamped, exportable</li><li>Team access so operations, field crews, and management see the inventory they need</li><li>Loss detection — off-hours geofence alerts when assets leave authorized zones</li><li>Low-battery status so inventory-critical assets don&#x27;t silently go dark</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Asset categories that benefit most from AirTag inventory management</h2></div><div><ul><li>Shared tools and power equipment — drills, saws, specialty tools rotating between teams</li><li>Rental and loaner equipment — confirm returns without manual check-ins</li><li>Calibration instruments — locate for scheduled PM without floor-by-floor searches</li><li>Mobile medical equipment — wheelchairs, pumps, scanners crossing units</li><li>Portable production equipment — AV kits, lighting racks, event equipment</li><li>High-value mobile assets — generators, pressure washers, scaffolding</li><li>Returnable packaging and containers — rolling cages, skips, bins</li><li>Specialty toolkits and case sets — kits that accumulate missing pieces over time</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>AirTag inventory vs RFID inventory management</h2></div><div><p>RFID inventory systems track assets by scanning them at fixed readers — typically at doorways, tool cribs, or choke points. When assets pass a reader, check-in/check-out events fire. When they don&#x27;t pass a reader (misplaced, left at a site, taken home in a truck), RFID visibility ends.</p><p>AirTag inventory tracks assets continuously, wherever they go, without fixed readers. A toolkit at a customer site still reports its location. A generator left on a trailer at a remote yard still appears on the map. RFID cannot provide this visibility without dense reader infrastructure across every location — a $200K–$500K+ per-facility investment that most operations cannot justify.</p><p>The tradeoff is precision: RFID with dense readers can pinpoint which aisle or bay an asset is in. AirTags are accurate to 10–50 meters in most environments. For zone-level inventory tracking, AirTag is often enough. For aisle-level positioning, RFID still wins.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Integrating AirTag inventory with ERP, CMMS, or asset management systems</h2></div><div><p>TagLogger supports CSV and JSON export of asset location history, including timestamp, geofence events, and asset metadata. Most organizations ingest this into an existing ERP, CMMS, or asset management platform to consolidate location with maintenance records, purchase history, and other asset metadata.</p><p>For operations needing continuous sync rather than periodic export, API access is available. Common integration patterns: daily location snapshot imports, geofence-triggered webhooks for workflow automation, and scheduled exports for compliance reporting.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Building an AirTag inventory rollout</h2></div><div><p>Start with one asset category that generates the most &quot;where is it?&quot; calls — typically shared tools or rental equipment. Tag 20–50 assets, name them with existing inventory numbers, and set geofences around the storage locations and work sites.</p><p>First 2–4 weeks: review which assets are actually moving, which are sitting idle (maybe candidates for disposal or reallocation), which are disappearing at predictable times (potential workflow or theft issues). Use these insights to tune the inventory workflow before expanding.</p><p>From there, expand by category. Most rollouts add a new category every 2–4 weeks and reach steady state across all high-value mobile assets within a quarter.</p></div></div></div></section><section class="faq-section" role="region" aria-labelledby="industry-solution-faq-title"><div class="faq-content"><h2 id="industry-solution-faq-title" class="faq-title">Frequently asked questions</h2><div class="faq-list" role="list"><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-0"><span class="faq-row-question-text">Can AirTags replace manual asset inventory spreadsheets?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-row-question-text">Can AirTags replace RFID inventory systems?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-2"><span class="faq-row-question-text">How do check-in and check-out workflows work with AirTag inventory?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-3"><span class="faq-row-question-text">Can we get alerts when inventory goes missing?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-row-question-text">Can AirTag inventory data feed our ERP or CMMS?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-row-question-text">How many assets can we track with an AirTag inventory system?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-row-question-text">What happens when an AirTag battery dies in an inventory-tracked asset?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-7"><span class="faq-row-question-text">Can we track assets across multiple facilities?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-8"><span class="faq-row-question-text">Is AirTag inventory compliant with asset audit requirements?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-9"><span class="faq-row-question-text">How fast can we deploy AirTag inventory management?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class="industry-solution-cta-box "><h2>Make asset inventory passive and always-on</h2><p>AirTags + TagLogger replace spreadsheets, RFID reader infrastructure, and missing-asset hunts with continuous location data for every tracked asset.</p><div class="industry-solution-cta-actions"><a class="industry-solution-cta-primary" href="/#pricing" data-discover="true">Get Started</a><a class="industry-solution-cta-secondary" href="/#get-in-touch" data-discover="true">Get in Touch</a></div></div></div></section><section class="industry-solution-section industry-solution-related" aria-labelledby="related-links-title"><div class="industry-solution-container"><h2 id="related-links-title">Related Pages</h2><div class="industry-solution-related-group"><h3>Resources</h3><div class="industry-solution-chip-grid"><a class="industry-solution-chip-link" href="/resources/multiple-airtags-fleet/" data-discover="true">Managing Multiple AirTags</a><a class="industry-solution-chip-link" href="/resources/airtag-indoor-tracking/" data-discover="true">AirTag Indoor Tracking</a><a class="industry-solution-chip-link" href="/resources/how-to-create-a-geofence/" data-discover="true">AirTag Geofence</a><a class="industry-solution-chip-link" href="/resources/set-up-airtag-business/" data-discover="true">Set Up AirTag for Business</a></div></div></div></section></main></div>
+    <script type="application/ld+json" id="taglogger-industry-solution-webpage">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AirTag-Based Asset Inventory Management",
+  "description": "Use AirTags as the hardware layer for asset inventory management — automatic location updates, check-in/check-out workflows, loss prevention, and CSV export.",
+  "url": "https://taglogger.com/resources/airtag-inventory-management/"
+}
+    </script>
+        <script type="application/ld+json" id="taglogger-industry-solution-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can AirTags replace manual asset inventory spreadsheets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For location and movement tracking, yes — AirTags eliminate the \"where is it?\" question and the manual check-in discipline that spreadsheets require. For purchase history, maintenance records, and accounting data, you'll still want a CMMS or asset management system, which TagLogger can feed via CSV or API."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can AirTags replace RFID inventory systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For zone-level tracking (\"which site, which floor, which yard?\") — yes, at a fraction of RFID's infrastructure cost. For aisle-level or bay-level precision inside a single facility, RFID with dense readers remains more accurate. Many organizations use AirTag inventory for multi-site asset visibility and keep RFID for specific high-precision use cases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do check-in and check-out workflows work with AirTag inventory?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In TagLogger, check-in/check-out is typically geofence-driven: a tool entering the yard geofence is \"checked in\" automatically; a tool leaving is \"checked out\". Manual check-in/check-out steps can still be added for workflows that need explicit confirmation (rentals, controlled tools), but they're verification rather than the source of truth."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can we get alerts when inventory goes missing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Geofence alerts fire when assets leave authorized zones (yard, shop, customer site). Stale-asset reports surface items that haven't moved in 7, 14, or 30+ days. Off-hours movement alerts catch potential theft before it escalates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can AirTag inventory data feed our ERP or CMMS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. TagLogger supports CSV and JSON export, plus API access for live sync. Common integration patterns: daily snapshots into ERP, geofence-triggered webhooks, and scheduled exports for audit workflows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many assets can we track with an AirTag inventory system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No practical upper limit on tracked assets. TagLogger is built for fleet-scale deployments with hundreds or thousands of AirTags across multiple sites. Find My alone becomes unworkable past ~15-20 AirTags per Apple ID."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when an AirTag battery dies in an inventory-tracked asset?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TagLogger surfaces low-battery status before the AirTag goes dark, so batteries can be swapped proactively. For fleets where annual CR2032 swaps are operationally painful, the Extended Battery Case option runs up to ~10 years on two AA batteries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can we track assets across multiple facilities?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. AirTag inventory works across any number of sites from one platform. Each site can have its own naming conventions, geofences, and role-based access — but the fleet view is unified so central operations see everything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is AirTag inventory compliant with asset audit requirements?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most audit trails that require time-stamped asset location records, yes. TagLogger stores continuous location history per asset, exportable as timestamped CSV or JSON. Specific regulatory requirements (FDA medical device tracking, specific financial asset controls) may need additional documentation layers — TagLogger provides the location data, not the compliance framework."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast can we deploy AirTag inventory management?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "First 20–50 asset deployment: an afternoon. Full rollout across multiple asset categories: 1–2 quarters, phasing in categories every few weeks. No RFID infrastructure, no cellular provisioning, no multi-month integration project."
+      }
+    }
+  ]
+}
+    </script>
+  </body>
+</html>

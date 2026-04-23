@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How the Find My Network Works: AirTag Location Explained | TagLogger</title>
+    <meta name="title" content="How the Find My Network Works: AirTag Location Explained | TagLogger" />
+    <meta name="description" content="How does the Find My network work? Explains crowdsourced Bluetooth relay, end-to-end encryption, and how AirTag locations reach the owner&#39;s device." />
+    <meta name="keywords" content="How Find My Network Works, resources, AirTag tracking, TagLogger" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/resources/find-my-network-how-it-works/" />
+    <meta property="og:title" content="How the Find My Network Works: AirTag Location Explained | TagLogger" />
+    <meta property="og:description" content="How does the Find My network work? Explains crowdsourced Bluetooth relay, end-to-end encryption, and how AirTag locations reach the owner&#39;s device." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/resources/find-my-network-how-it-works/" />
+    <meta name="twitter:title" content="How the Find My Network Works: AirTag Location Explained | TagLogger" />
+    <meta name="twitter:description" content="How does the Find My network work? Explains crowdsourced Bluetooth relay, end-to-end encryption, and how AirTag locations reach the owner&#39;s device." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href="https://taglogger.com/resources/find-my-network-how-it-works/" />
+    <meta name="generator" content="TagLogger static public content generator 2026-04-23" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
+
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
+
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
+
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
+
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
+
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
+
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
+
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
+
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-DoEGTZ0e.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-Cdac8F7h.css">
+  </head>
+  <body>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><main id="main-content" class="industry-solution-page" role="main" tabindex="-1"><section class="industry-solution-hero" aria-labelledby="industry-solution-page-title"><div class="industry-solution-hero-noise" aria-hidden="true"></div><div class="industry-solution-container"><nav aria-label="Breadcrumb" class="industry-solution-breadcrumb"><ol class="industry-solution-breadcrumb-list"><li class="industry-solution-breadcrumb-item"><a href="/" data-discover="true">Home</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><a href="/#resources" data-discover="true">Resources</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><span aria-current="page">How Find My Network Works</span></li></ol></nav><p class="industry-solution-eyebrow">How Find My Network Works</p><h1 id="industry-solution-page-title" class="industry-solution-title">How the Apple Find My Network Actually Works</h1><p class="industry-solution-subtitle">The Find My network is Apple&#x27;s crowdsourced Bluetooth relay — about 1 billion+ iPhones, iPads, and Macs that anonymously forward AirTag location pings to their owners. Here is how it works under the hood, how privacy is preserved, and why it matters for anyone tracking AirTags.</p></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>The 30-second explanation</h2></div><div><p>AirTags don&#x27;t have GPS, don&#x27;t have cellular, and don&#x27;t have Wi-Fi. They are Bluetooth Low Energy (BLE) beacons — they broadcast a rotating identifier every couple of seconds, and that&#x27;s it.</p><p>The Find My network consists of all opted-in Apple devices (iPhones, iPads, Macs) worldwide. When any of those devices detects a BLE signal from an AirTag, it silently sends that signal (along with the device&#x27;s current GPS location) to Apple&#x27;s servers via the device&#x27;s own internet connection.</p><p>Apple&#x27;s servers don&#x27;t know what the AirTag is. They store the encrypted pairing &quot;this BLE identifier was seen at this location at this time&quot; without any connection to a specific AirTag owner. Only the owner&#x27;s iPhone/iPad/Mac has the private key needed to decrypt those pairings and see their AirTag&#x27;s location.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>The Find My network is huge — and that&#x27;s why AirTags work</h2></div><div><p>Apple has stated the Find My network spans more than 1 billion active devices. This is the largest opt-in crowdsourced location network ever deployed.</p><p>Network density is why AirTags report so reliably in populated areas. An AirTag in a city passes hundreds of Apple devices per hour — each of which can independently relay its location. The AirTag itself does nothing different; the network just hears it often enough to keep its location fresh.</p><p>In remote areas with few Apple devices, AirTag reporting goes sparse. Not because the AirTag failed, but because the network has no devices nearby to relay the signal.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>How privacy is preserved</h2></div><div><ul><li>Rotating Bluetooth identifier — the AirTag changes its broadcast ID roughly every 15 minutes, so its signal cannot be tracked across time by any observer other than the owner</li><li>End-to-end encryption — only the AirTag owner has the key to decrypt the location data, meaning Apple itself cannot see any AirTag&#x27;s location</li><li>Anonymous relay — the iPhone relaying an AirTag ping does not know what AirTag it&#x27;s relaying, and the AirTag does not know what device relayed it</li><li>No personal data on the AirTag — the AirTag stores no user data, no account info, and no previous locations</li><li>Opt-in participation — users can disable Find My network participation on their own Apple devices, though almost all leave it enabled because it&#x27;s how their own devices get tracked</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Why Apple designed it this way</h2></div><div><p>Apple made two design choices that define how the Find My network works: the AirTag is passive (no GPS, no cellular), and the location history is not stored on Apple&#x27;s servers in a user-queryable form.</p><p>Passive hardware keeps AirTags cheap ($29), small (about the size of a coin), and long-lasting on a single coin-cell battery (~1 year). A GPS- and cellular-enabled tracker would need 10x the battery for days or weeks of reporting, plus per-device cellular fees.</p><p>No user-queryable history on Apple&#x27;s servers is a privacy choice. Storing detailed location history of every AirTag would create a legal and security liability — the kind of data no company should hold at scale. Find My shows only the latest location because that&#x27;s operationally useful for the &quot;finding keys&quot; use case, without becoming a surveillance database.</p><p>This second choice is also why TagLogger exists. For business use cases that need location history (recovery, audit, fleet management), the owner needs their own history layer. TagLogger captures every location report for linked AirTags and stores it on the user&#x27;s behalf — the owner has always had the data rights, they just didn&#x27;t have the storage.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>What the Find My network can and cannot do</h2></div><div><ul><li>Can: track an AirTag anywhere other Apple devices are nearby (which is most of the populated world)</li><li>Can: locate an AirTag that&#x27;s moved far from its owner — the network doesn&#x27;t care who relays the ping</li><li>Can: maintain privacy even as the AirTag changes hands — the new holder&#x27;s iPhone cannot decrypt the AirTag&#x27;s location reports</li><li>Cannot: track an AirTag in areas with no Apple-device foot traffic (deep remote, ocean, airborne)</li><li>Cannot: give the owner real-time updates faster than the network relays (usually minutes, sometimes hours in quiet areas)</li><li>Cannot: support sub-meter precision without Precision Finding (the U1/U2 UWB short-range feature on compatible iPhones)</li></ul></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Find My network vs Tile network vs Samsung SmartThings Find</h2></div><div><p>Tile has its own crowdsourced network, built on the Tile app installed on users&#x27; phones plus recent Amazon Sidewalk integration. It is much smaller than the Find My network in absolute size.</p><p>Samsung&#x27;s SmartThings Find network is limited to Samsung Galaxy devices — still a substantial number globally, but smaller than Apple&#x27;s iPhone footprint and heavily concentrated in certain markets.</p><p>The practical effect: AirTags typically report more frequently than Tile or SmartTag in the same location, because Apple&#x27;s network has more &quot;ears&quot; per square kilometer in most populated areas.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Anti-stalking and the Find My network</h2></div><div><p>Because the Find My network can track any AirTag anywhere, Apple has built in anti-stalking protections. An iPhone that detects an unknown AirTag traveling with it for an extended period alerts the user. Android phones have a similar &quot;Tracker Detect&quot; capability that scans for unknown BLE trackers.</p><p>These protections matter for consumer use. For business use, they occasionally cause friction — a rental customer&#x27;s phone may alert them to the rental&#x27;s tracker, for example. Most legitimate business tracking discloses tracking in the service agreement or uses hidden placement for high-value items. See the Track a Stolen AirTag guide for a longer discussion of anti-stalking implications.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Why understanding the Find My network matters for business AirTag use</h2></div><div><p>Three practical implications for anyone deploying AirTags at scale: 1) reporting frequency tracks with Apple-device density — a fleet operating in populated areas will report near-continuously, a fleet in remote areas will not; 2) there is no way to speed up reporting beyond what the network relays — you cannot pay for &quot;premium updates&quot;; and 3) the history that matters is the one you capture, because Apple does not provide a history view.</p><p>TagLogger&#x27;s role is to close the third gap for business users. The Find My network still provides the relay infrastructure. TagLogger provides the location history, geofence alerts, team access, and export that business deployments need on top of that relay.</p></div></div></div></section><section class="faq-section" role="region" aria-labelledby="industry-solution-faq-title"><div class="faq-content"><h2 id="industry-solution-faq-title" class="faq-title">Frequently asked questions</h2><div class="faq-list" role="list"><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-0"><span class="faq-row-question-text">How does the Find My network work?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-row-question-text">How many devices are in the Find My network?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-2"><span class="faq-row-question-text">Does the Find My network work without Wi-Fi on the AirTag?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-3"><span class="faq-row-question-text">Is the Find My network private?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-row-question-text">Can Apple see where my AirTag is?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-row-question-text">How often does the Find My network update an AirTag&#x27;s location?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-row-question-text">Does the Find My network work on Android?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-7"><span class="faq-row-question-text">Does the Find My network work internationally?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-8"><span class="faq-row-question-text">Why doesn&#x27;t the Find My network store AirTag location history?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-9"><span class="faq-row-question-text">Can AirTags work without the Find My network?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class="industry-solution-cta-box "><h2>Capture what the Find My network doesn&#x27;t give you</h2><p>The Find My network relays your AirTag locations. TagLogger captures them — full location history, geofence alerts, team access, and export.</p><div class="industry-solution-cta-actions"><a class="industry-solution-cta-primary" href="/#pricing" data-discover="true">Get Started</a><a class="industry-solution-cta-secondary" href="/#get-in-touch" data-discover="true">Get in Touch</a></div></div></div></section><section class="industry-solution-section industry-solution-related" aria-labelledby="related-links-title"><div class="industry-solution-container"><h2 id="related-links-title">Related Pages</h2><div class="industry-solution-related-group"><h3>Resources</h3><div class="industry-solution-chip-grid"><a class="industry-solution-chip-link" href="/resources/find-my-location-history/" data-discover="true">Find My Location History</a><a class="industry-solution-chip-link" href="/resources/airtag-range-accuracy/" data-discover="true">AirTag Range &amp; Accuracy</a><a class="industry-solution-chip-link" href="/resources/airtag-vs-tile-vs-samsung-smarttag/" data-discover="true">AirTag vs Tile vs Samsung SmartTag</a><a class="industry-solution-chip-link" href="/resources/history-playback/" data-discover="true">AirTag Location History</a></div></div></div></section></main></div>
+    <script type="application/ld+json" id="taglogger-industry-solution-webpage">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "How the Apple Find My Network Actually Works",
+  "description": "How does the Find My network work? Explains crowdsourced Bluetooth relay, end-to-end encryption, and how AirTag locations reach the owner's device.",
+  "url": "https://taglogger.com/resources/find-my-network-how-it-works/"
+}
+    </script>
+        <script type="application/ld+json" id="taglogger-industry-solution-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the Find My network work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Apple's Find My network is a crowdsourced Bluetooth relay. AirTags broadcast a rotating identifier via Bluetooth Low Energy. Any nearby Apple device (iPhone, iPad, Mac) that detects the signal silently uploads it — along with the device's own location — to Apple's servers. The AirTag's owner can then see that location through Find My or TagLogger."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many devices are in the Find My network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Apple has stated more than 1 billion active devices — the largest crowdsourced location network ever deployed. This is why AirTags report reliably in populated areas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the Find My network work without Wi-Fi on the AirTag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The AirTag itself has no Wi-Fi, no cellular, and no GPS. It's a passive Bluetooth beacon. The relay Apple device uses its own internet connection (Wi-Fi or cellular) to upload the location report."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Find My network private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Location reports are end-to-end encrypted and only the AirTag owner has the key to decrypt them. Apple itself cannot see any AirTag's location. The Bluetooth identifier rotates every ~15 minutes to prevent tracking by third parties."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Apple see where my AirTag is?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Apple's servers store encrypted location reports, but only the owner's device has the decryption key. Apple designed the system specifically so Apple has no access to individual AirTag locations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often does the Find My network update an AirTag's location?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Variable, based on how often a nearby Apple device passes the AirTag. In dense urban areas, every few minutes. In suburbs, every 15 minutes to an hour. In remote areas, hours to days between updates or no updates at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the Find My network work on Android?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Android users cannot use the Find My network for their own tracking (AirTags require an Apple account to pair). Android users can detect unknown AirTags nearby via Apple's Tracker Detect app or Google's built-in Unknown Tracker Alerts. For business AirTag use on Android, TagLogger provides a web platform that works on any device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the Find My network work internationally?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Any Apple device anywhere in the world can relay AirTag signals. The density of Apple devices varies by country — higher in markets with high iPhone share, lower in markets dominated by other ecosystems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't the Find My network store AirTag location history?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Apple made a deliberate privacy and liability choice — storing detailed location history server-side would create a surveillance database. Find My shows only the latest location. For users who need AirTag location history (fleet management, recovery, audit), TagLogger captures and stores it on the user's behalf."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can AirTags work without the Find My network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Without the Find My network there are no relay devices, and the AirTag's Bluetooth signal has no path to the owner. AirTags are only useful because the Find My network exists — the hardware alone is just a BLE beacon."
+      }
+    }
+  ]
+}
+    </script>
+  </body>
+</html>

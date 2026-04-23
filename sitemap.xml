@@ -26,6 +26,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://taglogger.com/resources/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://taglogger.com/industries/construction/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -86,7 +91,147 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://taglogger.com/resources/airtag-alerts-and-notifications/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-battery-life/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-bike-theft-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-construction-tool-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-container-trailer-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-courier-delivery-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-data-export-and-api-integration/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-event-av-equipment-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-field-service-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-for-education-campus-assets/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-for-landscaping-lawn-care/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-for-plumbers-electricians-trades/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-hardware-options/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-healthcare-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-indoor-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-inventory-management/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-it-asset-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-not-updating/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-privacy-anti-stalking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-range-accuracy/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-rental-equipment-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-supply-chain-logistics/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-vehicle-tracking/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-vs-gps-tracker/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-vs-tile-vs-samsung-smarttag/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/airtag-waterproof-outdoor-use/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://taglogger.com/resources/edit-tag-names-and-colors/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/find-my-location-history/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/find-my-network-how-it-works/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -97,6 +242,21 @@
   </url>
   <url>
     <loc>https://taglogger.com/resources/how-to-create-a-geofence/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/multiple-airtags-fleet/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/set-up-airtag-business/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://taglogger.com/resources/track-stolen-airtag/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
