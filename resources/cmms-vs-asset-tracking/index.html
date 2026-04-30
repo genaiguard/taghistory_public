@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMMS vs Asset Tracking: Do You Need Both? (2026)</title>
+    <meta name="title" content="CMMS vs Asset Tracking: Do You Need Both? (2026)" />
+    <meta name="description" content="CMMS handles work orders and PMs. Asset tracking handles location. Honest comparison of MaintainX, UpKeep, Limble, Fiix, and where AirTag tracking fits." />
+    <meta name="keywords" content="CMMS vs Asset Tracking, resources, AirTag tracking, TagLogger" />
+    <meta name="author" content="TagLogger" />
+    <meta name="application-name" content="TagLogger" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taglogger.com/resources/cmms-vs-asset-tracking/" />
+    <meta property="og:title" content="CMMS vs Asset Tracking: Do You Need Both? (2026)" />
+    <meta property="og:description" content="CMMS handles work orders and PMs. Asset tracking handles location. Honest comparison of MaintainX, UpKeep, Limble, Fiix, and where AirTag tracking fits." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://taglogger.com/og-image.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:site_name" content="TagLogger" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://taglogger.com/resources/cmms-vs-asset-tracking/" />
+    <meta name="twitter:title" content="CMMS vs Asset Tracking: Do You Need Both? (2026)" />
+    <meta name="twitter:description" content="CMMS handles work orders and PMs. Asset tracking handles location. Honest comparison of MaintainX, UpKeep, Limble, Fiix, and where AirTag tracking fits." />
+    <meta name="twitter:image" content="https://taglogger.com/og-image.webp" />
+    <meta name="twitter:image:alt" content="TagLogger dashboard and AirTag hardware options for teams" />
+    <meta name="theme-color" content="#f8f9fa" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="TagLogger" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href="https://taglogger.com/resources/cmms-vs-asset-tracking/" />
+    <link rel="alternate" hreflang="x-default" href="https://taglogger.com/resources/cmms-vs-asset-tracking/" />
+    <meta name="generator" content="TagLogger static public content generator 2026-04-30" />
+    <!-- Shared Public Head Start -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3J35H2ZZB8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3J35H2ZZB8', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+      
+      // Make gtag globally accessible for debugging
+      window.gtag = gtag;
+      console.log('GA4 initialized for TagLogger');
+    </script>
+
+    <script>
+      (function(w) {
+        if (typeof w.__tagloggerDeferPublicScript === 'function') return;
+
+        w.__tagloggerDeferPublicScript = function(loader) {
+          let started = false;
+          let timeoutId = null;
+
+          const cleanup = () => {
+            if (timeoutId !== null) {
+              w.clearTimeout(timeoutId);
+            }
+            w.removeEventListener('pointerdown', start);
+            w.removeEventListener('keydown', start);
+            w.removeEventListener('touchstart', start);
+            w.removeEventListener('scroll', start);
+          };
+
+          const start = () => {
+            if (started) return;
+            started = true;
+            cleanup();
+            loader();
+          };
+
+          w.addEventListener('pointerdown', start, { once: true, passive: true });
+          w.addEventListener('keydown', start, { once: true });
+          w.addEventListener('touchstart', start, { once: true, passive: true });
+          w.addEventListener('scroll', start, { once: true, passive: true });
+          timeoutId = w.setTimeout(start, 3500);
+        };
+      })(window);
+    </script>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+      (function(w, d) {
+        if (w._metaPixelInitialized) return;
+
+        const fbq = w.fbq = w.fbq || function() {
+          fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+        };
+
+        if (!w._fbq) w._fbq = fbq;
+        fbq.push = fbq;
+        fbq.loaded = false;
+        fbq.version = '2.0';
+        fbq.queue = fbq.queue || [];
+
+        const loadMetaPixel = () => {
+          if (w._metaPixelScriptRequested) return;
+          w._metaPixelScriptRequested = true;
+          const script = d.createElement('script');
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          const firstScript = d.getElementsByTagName('script')[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        w._metaPixelInitialized = true;
+        fbq('init', '1412716219985518');
+        fbq('track', 'PageView');
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadMetaPixel);
+        } else {
+          loadMetaPixel();
+        }
+      })(window, document);
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(w, d, key, tagName, projectId) {
+        w[key] = w[key] || function() {
+          (w[key].q = w[key].q || []).push(arguments);
+        };
+
+        const loadClarity = () => {
+          if (w._tagloggerClarityScriptRequested) return;
+          w._tagloggerClarityScriptRequested = true;
+          const script = d.createElement(tagName);
+          script.async = 1;
+          script.src = 'https://www.clarity.ms/tag/' + projectId;
+          const firstScript = d.getElementsByTagName(tagName)[0];
+          firstScript.parentNode.insertBefore(script, firstScript);
+        };
+
+        if (typeof w.__tagloggerDeferPublicScript === 'function') {
+          w.__tagloggerDeferPublicScript(loadClarity);
+        } else {
+          loadClarity();
+        }
+      })(window, document, 'clarity', 'script', 'tf2fjljjt0');
+    </script>
+    <!-- End Microsoft Clarity -->
+    <!-- Shared Public Head End -->
+    <script type="module" crossorigin src="/assets/main-CMgaf38z.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-atImXVkK.css">
+  </head>
+  <body>
+    <!-- Shared Public Body Start -->
+    <!-- Meta Pixel noscript fallback -->
+    <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1412716219985518&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- Shared Public Body End -->
+    <div id="root"><link rel="preload" as="image" href="/resource-illustrations/cmms-vs-asset-tracking.png"/><main id="main-content" class="industry-solution-page resource-page-surface" role="main" tabindex="-1"><section class="industry-solution-hero resource-page-hero" aria-labelledby="industry-solution-page-title"><div class="industry-solution-hero-noise" aria-hidden="true"></div><div class="industry-solution-container"><div class="resource-page-hero-layout"><div class="resource-page-hero-copy"><nav aria-label="Breadcrumb" class="industry-solution-breadcrumb"><ol class="industry-solution-breadcrumb-list"><li class="industry-solution-breadcrumb-item"><a href="/" data-discover="true">Home</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><a href="/resources/" data-discover="true">Resources</a><span class="industry-solution-breadcrumb-sep" aria-hidden="true">/</span></li><li class="industry-solution-breadcrumb-item"><span aria-current="page">CMMS vs Asset Tracking</span></li></ol></nav><p class="industry-solution-eyebrow">Compare &amp; Evaluate</p><h1 id="industry-solution-page-title" class="industry-solution-title">CMMS vs Asset Tracking: Two Different Jobs</h1><p class="industry-solution-subtitle">A CMMS schedules maintenance and routes work orders. An asset-tracking system tells you where the asset physically is. Most ops teams eventually need both — and they usually talk to each other through an API. This guide explains where the line sits, what the major CMMS vendors actually ship for location, and when a dedicated tracking layer earns its keep. See how <a href="/resources/airtag-data-export-and-api-integration/" data-discover="true">TagLogger&#x27;s data export and API</a> feeds into the major CMMS platforms.</p><p class="industry-solution-byline">Max Ipek @ TagLogger · Updated April 30, 2026</p></div><div class="resource-hero-illustration-shell" aria-hidden="true"><img src="/resource-illustrations/cmms-vs-asset-tracking.png" alt="" class="resource-hero-illustration" loading="eager"/></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>The short answer: they solve different problems</h2></div><div><p>A computerized maintenance management system (CMMS) is a system of record for maintenance work. It owns the asset register, preventive maintenance schedules, work-order workflows, technician assignments, parts inventory, and a paper trail for compliance. Vendors in this space include MaintainX, UpKeep, Limble, Fiix (Rockwell), and eMaint (Fluke).</p><p>An asset-tracking system is a system of record for asset location. It owns the live coordinates, location history, geofence events, last-seen timestamps, and the export feed that other systems consume. AirTag-based tracking — including TagLogger — sits in this category.</p><p>The confusion comes from vocabulary. Most CMMS products have a field called &quot;location&quot; on the asset record. That field is almost always a text label — &quot;Plant 2, Bay 4,&quot; &quot;Truck 17,&quot; &quot;Warehouse North&quot; — entered manually by a technician. It is not a coordinate, it does not update on its own, and it does not raise an alert when the asset leaves the site. If you ask a CMMS &quot;where is mobile generator #14 right now,&quot; the answer is whatever a human last typed.</p><p>That gap is what dedicated asset tracking fills. Whether that gap matters to your operation depends on how mobile your assets are, how much they walk off, and how often field techs waste a morning hunting for them.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>What a CMMS actually does (and what it doesn&#x27;t)</h2></div><div><p>To make this concrete, here is what the major CMMS platforms ship in their core product, based on public documentation as of 2026:</p><ul><li>**Work order management** — create, assign, prioritize, and close work orders. Standard across MaintainX, UpKeep, Limble, Fiix, eMaint.</li><li>**Preventive maintenance scheduling** — recurring PMs by date, runtime, meter reading. Standard.</li><li>**Asset hierarchy and registry** — parent/child asset trees, criticality scoring. Standard.</li><li>**Parts and inventory** — stockroom counts, min/max levels, reorder triggers. Standard, sometimes a paid add-on.</li><li>**Reporting on MTBF, MTTR, PM compliance, work-order backlog** — standard.</li></ul><p class="industry-solution-trailing-paragraph">What CMMS platforms typically do **not** ship as a core feature: live GPS or BLE location of assets, geofencing and movement alerts, continuous location history, or hardware tags. The &quot;location&quot; field on an asset is a text string in nearly every product. A few CMMS products advertise IoT or condition-monitoring integrations — those are typically inbound feeds for sensor data (temperature, vibration, runtime hours), not fleet-wide location with geofences and history.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>&quot;Does my CMMS already track location?&quot; — what to ask the vendor</h2></div><div><p>Before you buy a second system, pressure-test what your CMMS actually offers. Specific questions cut through marketing copy:</p><ul><li>Is the location field a coordinate or a label? If it&#x27;s a label, the system has no idea where the asset physically is.</li><li>Does the location update automatically, or does a tech update it on close-out of a work order? Manual updates lag by days or weeks.</li><li>Can I draw a geofence and get an alert when an asset leaves it? If no, there is no movement detection.</li><li>Can I see the location history of a single asset over the last 90 days? If no, you cannot answer &quot;where has this generator been&quot; during an audit.</li><li>If I bring my own tracking data, can I push it in via API? This is the realistic answer for most teams: keep the CMMS for work, add a tracking layer, integrate them.</li></ul><p class="industry-solution-trailing-paragraph">If the honest answers to the first four are &quot;label, manual, no, no,&quot; your CMMS is doing the job CMMSs are designed for, and tracking is genuinely a separate layer.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>When asset tracking and CMMS need to talk</h2></div><div><p>The integration pattern most ops teams converge on looks like this. The CMMS owns the asset master, work orders, and PM schedules. The tracking system owns last-seen location, geofence events, and history. A nightly or near-real-time sync writes location data back to a custom field on the CMMS asset record, or attaches a coordinate to each work order at the moment it&#x27;s created.</p><p>In practice this is done with an API. The tracking system exposes location data; an integration job writes it to the CMMS via the CMMS&#x27;s REST API or a middleware tool (Workato, Make, Zapier, or a custom script). MaintainX, UpKeep, Limble, and Fiix all have public APIs, though feature coverage varies by tier.</p><p>TagLogger&#x27;s role in this pattern is supplying the location feed. The platform exports tag location data and history as CSV, JSON, or via API — see <a href="/resources/airtag-data-export-and-api-integration/" data-discover="true">the AirTag export and API integration guide</a> for the specifics. From there, the data lands in your CMMS the same way any third-party feed would: scheduled job, custom field, done.</p></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class=""><div><h2>Pricing reality — what each layer costs</h2></div><div><p>Pricing for CMMS platforms changes frequently and depends heavily on user count and tier. Treat the figures below as 2026 list pricing per published vendor pages; always confirm at quote time.</p><ul><li>MaintainX — free tier exists; paid tiers start in the $16-$21/user/month range, with Premium and Enterprise tiers higher.</li><li>UpKeep — public pricing starts around $20/user/month and scales upward.</li><li>Limble — Standard, Premium+, Enterprise. Starter pricing in the $28-$35/user/month range.</li><li>Fiix — Free, Basic, Professional, Enterprise. Mid-tier pricing in the $45-$75/user/month range.</li><li>eMaint — quote-based; per-user model, generally enterprise pricing.</li></ul><p class="industry-solution-trailing-paragraph">CMMS pricing is **per user**. If you have 12 maintenance techs and 3 supervisors, you are paying for 15 seats. Asset tracking pricing — including TagLogger — is **per asset**, not per user. TagLogger is $10/tag/month, falling to $7.50/tag/month at 80+ tags. Unlimited users in the workspace at no extra seat cost. The two billing models compose well: tech headcount drives CMMS cost; mobile asset count drives tracking cost. They scale on different axes. See <a href="/#pricing" data-discover="true">/#pricing</a> for the live tier table.</p></div></div></div></section><section class="faq-section" role="region" aria-labelledby="industry-solution-faq-title"><div class="faq-content"><h2 id="industry-solution-faq-title" class="faq-title">Frequently asked questions</h2><div class="faq-list" role="list"><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-0"><span class="faq-row-question-text">Is asset tracking a feature of CMMS software?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-row-question-text">Can I use a CMMS without an asset-tracking system?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-2"><span class="faq-row-question-text">How does TagLogger integrate with a CMMS?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-3"><span class="faq-row-question-text">What&#x27;s the cost difference between CMMS and asset tracking?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-row-question-text">Will a CMMS&#x27; &quot;IoT integration&quot; replace dedicated asset tracking?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-row-question-text">How many tags does it take to make a tracking layer worth it?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div><div role="listitem" class="faq-row "><div class="faq-row-fill" aria-hidden="true" style="opacity:0"><div class="faq-row-fill-shade"></div></div><button type="button" class="faq-row-question" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-row-question-text">Does TagLogger handle preventive maintenance?</span><span class="faq-row-chevron " aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></span></button></div><div class="faq-divider"></div></div></div></section><section class="industry-solution-section"><div class="industry-solution-container"><div class="industry-solution-cta-box "><h2>Add the location layer your CMMS doesn&#x27;t ship</h2><p>Keep your CMMS for work orders and PMs. Add TagLogger for live location, history, and geofencing — exported to your CMMS via CSV, JSON, or API. Per-asset pricing, unlimited workspace users.</p><div class="industry-solution-cta-actions"><a href="/#pricing" class="industry-solution-cta-primary">See Pricing</a><a class="industry-solution-cta-secondary" href="/resources/airtag-data-export-and-api-integration/" data-discover="true">Read the API integration guide</a></div></div></div></section><section class="industry-solution-section industry-solution-related" aria-labelledby="related-links-title"><div class="industry-solution-container"><h2 id="related-links-title">Related Pages</h2><div class="industry-solution-related-group"><h3>Resources</h3><div class="industry-solution-chip-grid"><a class="industry-solution-chip-link" href="/resources/airtag-data-export-and-api-integration/" data-discover="true">AirTag Data Export &amp; API</a><a class="industry-solution-chip-link" href="/resources/airtag-healthcare-tracking/" data-discover="true">AirTag for Healthcare</a><a class="industry-solution-chip-link" href="/resources/airtag-construction-tool-tracking/" data-discover="true">AirTag for Construction Tools</a><a class="industry-solution-chip-link" href="/resources/multiple-airtags-fleet/" data-discover="true">Managing Multiple AirTags</a></div></div></div></section></main></div>
+    <script type="application/ld+json" id="taglogger-organization-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://taglogger.com/#organization",
+  "name": "TagLogger",
+  "url": "https://taglogger.com/",
+  "logo": "https://taglogger.com/logo-mark.svg",
+  "description": "AirTag-based asset tracking platform for businesses — location history, geofence alerts, and shared visibility for tools, trailers, fleets, and equipment.",
+  "sameAs": []
+}
+    </script>
+    <script type="application/ld+json" id="taglogger-software-application-jsonld">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://taglogger.com/#software",
+  "name": "TagLogger",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "url": "https://taglogger.com/",
+  "description": "Track tools, trailers, fleets, and equipment with AirTags. Location history, geofence alerts, and multi-user access without GPS-tracker overhead.",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "15.00",
+    "url": "https://taglogger.com/#pricing"
+  }
+}
+    </script>
+    
+    <script type="application/ld+json" id="taglogger-industry-solution-webpage">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "CMMS vs Asset Tracking: Two Different Jobs",
+  "description": "CMMS handles work orders and PMs. Asset tracking handles location. Honest comparison of MaintainX, UpKeep, Limble, Fiix, and where AirTag tracking fits.",
+  "url": "https://taglogger.com/resources/cmms-vs-asset-tracking/",
+  "author": {
+    "@type": "Person",
+    "name": "Max Ipek",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "TagLogger",
+      "url": "https://taglogger.com/"
+    }
+  },
+  "datePublished": "2026-04-30T00:00:00.000Z",
+  "dateModified": "2026-04-30T00:00:00.000Z"
+}
+    </script>
+    <script type="application/ld+json" id="taglogger-industry-solution-breadcrumb">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://taglogger.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Resources",
+      "item": "https://taglogger.com/resources/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CMMS vs Asset Tracking",
+      "item": "https://taglogger.com/resources/cmms-vs-asset-tracking/"
+    }
+  ]
+}
+    </script>
+        <script type="application/ld+json" id="taglogger-resource-article">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "CMMS vs Asset Tracking: Two Different Jobs",
+  "description": "CMMS handles work orders and PMs. Asset tracking handles location. Honest comparison of MaintainX, UpKeep, Limble, Fiix, and where AirTag tracking fits.",
+  "image": "https://taglogger.com/resource-illustrations/cmms-vs-asset-tracking.png",
+  "datePublished": "2026-04-30T00:00:00.000Z",
+  "dateModified": "2026-04-30T00:00:00.000Z",
+  "author": {
+    "@type": "Person",
+    "name": "Max Ipek",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "TagLogger",
+      "url": "https://taglogger.com/"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "TagLogger",
+    "url": "https://taglogger.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://taglogger.com/logo-mark.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://taglogger.com/resources/cmms-vs-asset-tracking/"
+  }
+}
+    </script>
+        <script type="application/ld+json" id="taglogger-industry-solution-faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is asset tracking a feature of CMMS software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not in any meaningful sense. Major CMMS platforms (MaintainX, UpKeep, Limble, Fiix, eMaint) treat \"location\" as a text label on the asset record, manually entered by a tech. They don't ship live coordinates, geofencing, or location history as a core feature. Real-time location is a separate layer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use a CMMS without an asset-tracking system?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, and many operations do. If your assets are stationary and location is obvious from the asset hierarchy, a CMMS alone is fine. The case for adding tracking comes from mobile assets, multi-site operations, or a recurring \"we can't find it\" problem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does TagLogger integrate with a CMMS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Via export. TagLogger provides CSV, JSON, and API access to current location, location history, and geofence events. A scheduled integration job writes that data to a custom field on the CMMS asset record or attaches it to work orders. The integration guide covers the API shape in detail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the cost difference between CMMS and asset tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CMMS pricing is per user — typically $20-$75 per user per month at SMB tiers. Asset tracking pricing is per asset — TagLogger is $10/tag/month, $7.50 at 80+ tags. The two scale on different axes: tech headcount for CMMS, mobile asset count for tracking. They don't replace each other on cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will a CMMS' \"IoT integration\" replace dedicated asset tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually not. CMMS IoT integrations are typically built for condition data — temperature, vibration, runtime hours — feeding condition-based PM triggers. They are not designed to be a fleet-wide location backbone with geofences and history. Ask the vendor for a specific live-location demo before assuming coverage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many tags does it take to make a tracking layer worth it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A rough cut: if your team has spent more than 4 hours total in the last month looking for an asset that was supposed to be on-site, the math usually works for any operation with 20+ mobile assets. Below that, manual location updates in the CMMS may be enough."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does TagLogger handle preventive maintenance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. TagLogger does not schedule PMs, manage work orders, or track parts inventory. It is intentionally focused on the location layer. PM scheduling and work-order workflow stay in your CMMS."
+      }
+    }
+  ]
+}
+    </script>
+  </body>
+</html>
