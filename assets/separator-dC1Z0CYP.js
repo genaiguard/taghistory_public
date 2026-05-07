@@ -1,6 +1,0 @@
-import{c as d,r as p,j as e}from"./main-DqIfacBf.js";import{c as v}from"./index-wmGb1Kw4.js";import{P as f}from"./index-CmzLE6IN.js";/**
- * @license lucide-react v0.574.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const m=[["path",{d:"M13.172 2a2 2 0 0 1 1.414.586l6.71 6.71a2.4 2.4 0 0 1 0 3.408l-4.592 4.592a2.4 2.4 0 0 1-3.408 0l-6.71-6.71A2 2 0 0 1 6 9.172V3a1 1 0 0 1 1-1z",key:"16rjxf"}],["path",{d:"M2 7v6.172a2 2 0 0 0 .586 1.414l6.71 6.71a2.4 2.4 0 0 0 3.191.193",key:"178nd4"}],["circle",{cx:"10.5",cy:"6.5",r:".5",fill:"currentColor",key:"12ikhr"}]],j=d("tags",m);var u="Separator",n="horizontal",h=["horizontal","vertical"],s=p.forwardRef((a,t)=>{const{decorative:o,orientation:r=n,...c}=a,i=x(r)?r:n,l=o?{role:"none"}:{"aria-orientation":i==="vertical"?i:void 0,role:"separator"};return e.jsx(f.div,{"data-orientation":i,...l,...c,ref:t})});s.displayName=u;function x(a){return h.includes(a)}var N=s;function k({className:a,orientation:t="horizontal",decorative:o=!0,...r}){return e.jsx(N,{"data-slot":"separator",decorative:o,orientation:t,className:v("shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",a),...r})}export{k as S,j as T};
