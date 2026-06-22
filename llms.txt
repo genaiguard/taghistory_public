@@ -1,6 +1,6 @@
 # TagLogger Developer API
 
-> Read tag locations and history, sync your fleet, and manage signed event webhooks.
+> Read tag locations and history, sync your fleet, manage geofences, manage signed event webhooks, and mint public tag share links.
 
 Base URL: served at this host under /v1 (e.g. https://api.taglogger.com/v1).
 Machine-readable spec: GET /v1/openapi.json (OpenAPI 3.1).
@@ -27,7 +27,10 @@ the raw key is shown only once at creation.
 - read:tags        list/read tags and their current location summary
 - read:locations   precise current location, history, and fleet delta
 - read:geofences   list/read geofence configuration
+- manage:geofences create/update/delete geofences
 - manage:webhooks  create/read/update/delete/rotate/test webhook subscriptions
+- read:share-links list/read public tag share links
+- manage:share-links create/revoke public tag share links
 
 ## Conventions
 - List endpoints return { data, nextCursor }. Pass nextCursor back as ?cursor= for the next page; null means end.
@@ -41,9 +44,13 @@ GET  /v1/tags                          List tags (read:tags)
 GET  /v1/tags/{tagId}                  Get a tag (read:tags)
 GET  /v1/tags/{tagId}/location         Current location (read:locations)
 GET  /v1/tags/{tagId}/history          Location history; params: start,end,order,limit,cursor (read:locations)
+GET  /v1/tags/{tagId}/battery          Coarse battery status (read:tags)
 GET  /v1/fleet/delta                   Changed tags since ?since=; params: limit,cursor (read:locations)
 GET  /v1/geofences                     List geofences (read:geofences)
+POST /v1/geofences                     Create a geofence (manage:geofences)
 GET  /v1/geofences/{geofenceId}        Get a geofence (read:geofences)
+PATCH /v1/geofences/{geofenceId}       Update name/center/radiusMeters/targetTagIds/alerts (manage:geofences)
+DELETE /v1/geofences/{geofenceId}      Delete a geofence (manage:geofences)
 GET  /v1/webhooks                      List webhook subscriptions (manage:webhooks)
 POST /v1/webhooks                      Create a subscription; returns signing secret once (manage:webhooks)
 GET  /v1/webhooks/{webhookId}          Get a subscription (manage:webhooks)
@@ -51,19 +58,31 @@ PATCH /v1/webhooks/{webhookId}         Update url/events/label/active (manage:we
 DELETE /v1/webhooks/{webhookId}        Delete a subscription (manage:webhooks)
 POST /v1/webhooks/{webhookId}/rotate-secret  Rotate signing secret; returns it once (manage:webhooks)
 POST /v1/webhooks/{webhookId}/test     Send a test delivery (manage:webhooks)
+GET  /v1/webhooks/{webhookId}/deliveries  Delivery history (status/attempts); params: limit,cursor (manage:webhooks)
+GET  /v1/share-links                   List share links; params: tagId,limit,cursor (read:share-links)
+POST /v1/share-links                   Mint a public, expiring share link for a tag (manage:share-links)
+GET  /v1/share-links/{shareLinkId}     Get a share link (read:share-links)
+DELETE /v1/share-links/{shareLinkId}   Revoke a share link (manage:share-links)
+GET  /v1/account                       Current workspace profile + plan (any valid key)
+GET  /v1/usage                         Per-day request counts for this key; param: days (any valid key)
 
 ## Webhook events
 tag.moved, tag.battery_low, tag.offline are delivered by the API event monitor.
-  Delivery is off by default at launch: a new subscription begins receiving tag.*
-  deliveries automatically once delivery is enabled (no changes needed on your side).
-  Delivery is best-effort / at-most-once: a failed POST is NOT retried in v1, so
-  reconcile against GET /v1/fleet/delta (the durable source of truth), not webhooks.
-geofence.entry, geofence.exit, geofence.dwell can be subscribed to for forward
-  compatibility but are NOT delivered to API-managed subscriptions in v1 (geofence
-  alerts are sent only to integrations chosen in a geofence's own alert settings).
+geofence.entry, geofence.exit, geofence.dwell are delivered by the API geofence
+  event monitor and mirror your geofences' entry/exit/dwell transitions.
+  Each monitor is independently operator-gated and off by default at launch: a new
+  subscription begins receiving deliveries automatically once delivery is enabled
+  (no changes needed on your side). API-managed geofence.* deliveries are separate
+  from a geofence's own in-app alert settings (subscribing here changes neither).
+  Delivery is at-least-once: a failed POST (non-2xx or timeout) is retried with
+  exponential backoff for several attempts, then marked permanently failed. The same
+  event may therefore arrive more than once - make your handler idempotent by
+  de-duplicating on the payload id. Check status/attempts via
+  GET /v1/webhooks/{webhookId}/deliveries. Webhooks are still a notification, not a
+  ledger: reconcile against GET /v1/fleet/delta (the durable source of truth).
 
 ## Webhook delivery format
-tag.* deliveries are HTTP POST with this JSON body:
+All deliveries are HTTP POST with this JSON envelope:
   { "id": "<unique delivery id>", "event": "tag.moved", "occurredAt": "<ISO-8601>",
     "test": false, "tag": { "id": "<tagId>", "name": "<label|null>",
     "hardwareId": "<hwId>" }, "data": { ...event-specific... } }
@@ -71,6 +90,9 @@ Per-event data field:
   tag.moved        { from: {lat,lng}, to: {lat,lng}, distanceMeters }
   tag.battery_low  { status, critical }
   tag.offline      { lastSeenAt, staleSeconds }
+  geofence.entry   { geofence: {id,name}, location: {lat,lng} }
+  geofence.exit    { geofence: {id,name}, location: {lat,lng} }
+  geofence.dwell   { geofence: {id,name}, location: {lat,lng}, dwellMinutes }
 Signature: header X-TagLogger-Signature: sha256=<hex HMAC-SHA256 of the raw JSON
   body using your signing secret>. Verify it before trusting a delivery.
 POST /v1/webhooks/{id}/test sends a sample signed event (test:true) so you can verify

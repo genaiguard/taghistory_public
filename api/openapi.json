@@ -6,8 +6,8 @@
     "license": {
       "name": "Proprietary"
     },
-    "summary": "Read tag locations and history, sync your fleet, and manage signed event webhooks.",
-    "description": "The TagLogger Developer API exposes your workspace's tag locations, location history,\ngeofence configuration, and outbound event webhooks over a versioned REST surface.\n\n## Authentication\nEvery request (except these docs) requires a workspace API key, sent either as\n`Authorization: Bearer <key>` or as the `X-API-Key` header. Keys are scoped and\nrevocable; the raw key is shown only once at creation. Live keys are prefixed\n`tl_live_` and test keys `tl_test_`.\n\n## Scopes\n- `read:tags` — list and read tags and their current location summary.\n- `read:locations` — read precise current location, location history, and fleet delta.\n- `read:geofences` — list and read geofence configuration.\n- `manage:webhooks` — create, read, update, delete, rotate, and test webhook subscriptions.\n\n## Pagination\nList endpoints return `{ data, nextCursor }`. When `nextCursor` is non-null, pass it back\nas the `cursor` query parameter to fetch the next page; a null `nextCursor` means the end.\n\n## Rate limits\nResponses carry `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset`.\nExceeding the limit returns `429` with a `Retry-After` header.\n\n## Errors\nErrors use the envelope `{ \"error\": { \"code\": string, \"message\": string } }`.",
+    "summary": "Read tag locations and history, sync your fleet, manage geofences and signed event webhooks, and mint public tag share links.",
+    "description": "The TagLogger Developer API exposes your workspace's tag locations, location history,\ngeofence configuration, and outbound event webhooks over a versioned REST surface.\n\n## Authentication\nEvery request (except these docs) requires a workspace API key, sent either as\n`Authorization: Bearer <key>` or as the `X-API-Key` header. Keys are scoped and\nrevocable; the raw key is shown only once at creation. Live keys are prefixed\n`tl_live_` and test keys `tl_test_`.\n\n## Scopes\n- `read:tags` — list and read tags and their current location summary.\n- `read:locations` — read precise current location, location history, and fleet delta.\n- `read:geofences` — list and read geofence configuration.\n- `manage:geofences` — create, update, and delete geofences.\n- `manage:webhooks` — create, read, update, delete, rotate, and test webhook subscriptions.\n- `read:share-links` — list and read tag share links.\n- `manage:share-links` — create and revoke tag share links.\n\n## Pagination\nList endpoints return `{ data, nextCursor }`. When `nextCursor` is non-null, pass it back\nas the `cursor` query parameter to fetch the next page; a null `nextCursor` means the end.\n\n## Rate limits\nResponses carry `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset`.\nExceeding the limit returns `429` with a `Retry-After` header.\n\n## Errors\nErrors use the envelope `{ \"error\": { \"code\": string, \"message\": string } }`.",
     "contact": {
       "name": "TagLogger API documentation",
       "url": "https://taglogger.com/docs/quickstart"
@@ -38,11 +38,19 @@
     },
     {
       "name": "Geofences",
-      "description": "Read geofence configuration."
+      "description": "Read and manage geofence configuration."
     },
     {
       "name": "Webhooks",
       "description": "Manage signed outbound event subscriptions."
+    },
+    {
+      "name": "Share Links",
+      "description": "Mint and revoke public, expiring tag share links."
+    },
+    {
+      "name": "Account",
+      "description": "Workspace profile, plan, and API usage."
     },
     {
       "name": "Meta",
@@ -275,6 +283,44 @@
         }
       }
     },
+    "/v1/tags/{tagId}/battery": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TagId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "getTagBattery",
+        "summary": "Get a tag's battery status",
+        "description": "Returns the tag's last reported battery state. `level` is reserved and currently always null; `status` is a coarse integer code (null when the tag has no hardware, no reading yet, or is out of the key's scope). Out-of-scope or unknown tags return 404. Requires `read:tags`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/TagBattery"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
     "/v1/fleet/delta": {
       "get": {
         "tags": [
@@ -388,6 +434,53 @@
             "$ref": "#/components/responses/InternalError"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Geofences"
+        ],
+        "operationId": "createGeofence",
+        "summary": "Create a geofence",
+        "description": "Creates a circular geofence. Entry and exit are always tracked; subscribe a webhook to `geofence.entry` / `geofence.exit` / `geofence.dwell` to receive events. In-app email and push channels are dashboard-only and are never enabled by an API write. Requires `manage:geofences`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGeofenceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Geofence"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
       }
     },
     "/v1/geofences/{geofenceId}": {
@@ -411,6 +504,84 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Geofence"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Geofences"
+        ],
+        "operationId": "updateGeofence",
+        "summary": "Update a geofence",
+        "description": "Updates name, center, radiusMeters, targetTagIds, and/or dwell alerts (any subset). A partial geometry edit is merged against the existing circle and re-validated. Requires `manage:geofences`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGeofenceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Geofence"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Geofences"
+        ],
+        "operationId": "deleteGeofence",
+        "summary": "Delete a geofence",
+        "description": "Permanently deletes the geofence. Requires `manage:geofences`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GeofenceDeleted"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -740,6 +911,332 @@
         }
       }
     },
+    "/v1/webhooks/{webhookId}/deliveries": {
+      "parameters": [
+        {
+          "name": "webhookId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "listWebhookDeliveries",
+        "summary": "List delivery attempts",
+        "description": "Returns a page of delivery records for this subscription, newest first — one record per event the platform attempted to deliver, with its current status (`delivered`, `failed`, `permanent_failed`, or in-flight) and attempt count. Use it to confirm receipt or diagnose a failing endpoint. Each record carries the `eventId` that matches the `id` field in the delivered payload, so you can correlate it with what your endpoint received. The outbound payload body is not echoed back. Records are retained for a limited window, then expire. Requires `manage:webhooks`.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum items to return (default 50, max 200). Values above 200 are clamped to 200; a missing, zero, negative, or non-numeric value falls back to 50 (the request is not rejected).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque pagination cursor from a prior response's `nextCursor`. Omit for the first page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookDeliveryList"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/share-links": {
+      "get": {
+        "tags": [
+          "Share Links"
+        ],
+        "operationId": "listShareLinks",
+        "summary": "List tag share links",
+        "description": "Returns the workspace's share links, including expired and revoked ones, for tags within the key's tag scope. Tokens are never returned on reads. Requires `read:share-links`.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum items to return (default 50, max 200). Values above 200 are clamped to 200; a missing, zero, negative, or non-numeric value falls back to 50 (the request is not rejected).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque pagination cursor from a prior response's `nextCursor`. Omit for the first page.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tagId",
+            "in": "query",
+            "required": false,
+            "description": "Filter to share links for a single tag.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ShareLinkList"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Share Links"
+        ],
+        "operationId": "createShareLink",
+        "summary": "Create a tag share link",
+        "description": "Mints a public, expiring share link for a tag that is linked to hardware. Links always expire: send `expiresInSeconds` or `expiresAt`, or accept the default (90 days). API-minted links can never be set to never-expire. The share URL is returned exactly once in this response. Requires `manage:share-links`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateShareLinkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/ShareLinkCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/share-links/{shareLinkId}": {
+      "parameters": [
+        {
+          "name": "shareLinkId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Share Links"
+        ],
+        "operationId": "getShareLink",
+        "summary": "Get a tag share link",
+        "description": "Returns a single share link, including its current status and access counts. Requires `read:share-links`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ShareLink"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Share Links"
+        ],
+        "operationId": "revokeShareLink",
+        "summary": "Revoke a tag share link",
+        "description": "Revokes the share link so its public URL stops resolving. The record and its access history are retained. Idempotent: revoking an already-revoked link still returns 200. Requires `manage:share-links`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ShareLinkRevoked"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/account": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "getAccount",
+        "summary": "Get the current workspace",
+        "description": "Returns the workspace that owns the API key (a \"whoami\"): profile and plan summary. Any valid key for the workspace may call it; no extra scope is required. Stripe identifiers, billing internals, and administrative flags are never included.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Account"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/usage": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "getUsage",
+        "summary": "Get API usage for this key",
+        "description": "Returns per-day request counts for the calling API key (identified by its own key id, not the whole workspace). Counts are request totals, not billing units. Rollups are retained ~40 days, then expire. Any valid key may call it; no extra scope is required.",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "description": "Number of trailing days to return, ending today (UTC). Default 30, max 40; out-of-range values are clamped.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 40,
+              "default": 30
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Usage"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
     "/v1/openapi.json": {
       "get": {
         "tags": [
@@ -816,7 +1313,7 @@
         },
         "responses": {
           "2XX": {
-            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures; v1 does not automatically retry."
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures and retried automatically with exponential backoff (delivery is at-least-once), so the same event may arrive more than once — dedupe on the payload `id` and keep your handler idempotent."
           }
         }
       }
@@ -849,7 +1346,7 @@
         },
         "responses": {
           "2XX": {
-            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures; v1 does not automatically retry."
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures and retried automatically with exponential backoff (delivery is at-least-once), so the same event may arrive more than once — dedupe on the payload `id` and keep your handler idempotent."
           }
         }
       }
@@ -882,7 +1379,106 @@
         },
         "responses": {
           "2XX": {
-            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures; v1 does not automatically retry."
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures and retried automatically with exponential backoff (delivery is at-least-once), so the same event may arrive more than once — dedupe on the payload `id` and keep your handler idempotent."
+          }
+        }
+      }
+    },
+    "geofence.entry": {
+      "post": {
+        "operationId": "webhookGeofenceEntry",
+        "summary": "A tag entered one of your geofences.",
+        "description": "TagLogger sends this POST to your subscription URL. Respond 2xx to acknowledge. Verify the X-TagLogger-Signature header before trusting the body.",
+        "parameters": [
+          {
+            "name": "X-TagLogger-Signature",
+            "in": "header",
+            "required": false,
+            "description": "sha256=<hex HMAC-SHA256 of the raw request body, computed with the subscription's signing secret>. Always present for API-created subscriptions (they always have a signing secret).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeofenceWebhookDelivery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures and retried automatically with exponential backoff (delivery is at-least-once), so the same event may arrive more than once — dedupe on the payload `id` and keep your handler idempotent."
+          }
+        }
+      }
+    },
+    "geofence.exit": {
+      "post": {
+        "operationId": "webhookGeofenceExit",
+        "summary": "A tag left one of your geofences.",
+        "description": "TagLogger sends this POST to your subscription URL. Respond 2xx to acknowledge. Verify the X-TagLogger-Signature header before trusting the body.",
+        "parameters": [
+          {
+            "name": "X-TagLogger-Signature",
+            "in": "header",
+            "required": false,
+            "description": "sha256=<hex HMAC-SHA256 of the raw request body, computed with the subscription's signing secret>. Always present for API-created subscriptions (they always have a signing secret).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeofenceWebhookDelivery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures and retried automatically with exponential backoff (delivery is at-least-once), so the same event may arrive more than once — dedupe on the payload `id` and keep your handler idempotent."
+          }
+        }
+      }
+    },
+    "geofence.dwell": {
+      "post": {
+        "operationId": "webhookGeofenceDwell",
+        "summary": "A tag stayed outside one of your geofences past its dwell threshold.",
+        "description": "TagLogger sends this POST to your subscription URL. Respond 2xx to acknowledge. Verify the X-TagLogger-Signature header before trusting the body.",
+        "parameters": [
+          {
+            "name": "X-TagLogger-Signature",
+            "in": "header",
+            "required": false,
+            "description": "sha256=<hex HMAC-SHA256 of the raw request body, computed with the subscription's signing secret>. Always present for API-created subscriptions (they always have a signing secret).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeofenceWebhookDelivery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures and retried automatically with exponential backoff (delivery is at-least-once), so the same event may arrive more than once — dedupe on the payload `id` and keep your handler idempotent."
           }
         }
       }
@@ -966,6 +1562,10 @@
                   "invalid_label",
                   "invalid_active",
                   "invalid_range",
+                  "invalid_geofence",
+                  "invalid_target_tags",
+                  "invalid_expiry",
+                  "tag_not_shareable",
                   "internal"
                 ]
               },
@@ -1356,9 +1956,95 @@
           }
         ]
       },
+      "WebhookDelivery": {
+        "type": "object",
+        "description": "A single delivery attempt record for a webhook subscription. The outbound payload body is not included.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Opaque delivery record id."
+          },
+          "webhookId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The subscription this delivery belongs to."
+          },
+          "event": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The event type that was delivered."
+          },
+          "eventId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The delivered envelope's `id` — matches the `id` field your endpoint received, for correlation and idempotent dedup."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "processing",
+              "failed",
+              "delivered",
+              "permanent_failed"
+            ],
+            "description": "Current delivery state. `delivered` = your endpoint returned 2xx. `failed` = retryable failure, another attempt is scheduled. `permanent_failed` = retries exhausted or the subscription was removed/disabled."
+          },
+          "attempts": {
+            "type": "integer",
+            "description": "Number of delivery attempts made so far."
+          },
+          "maxAttempts": {
+            "type": "integer",
+            "description": "Attempt ceiling before the delivery is marked permanently failed."
+          },
+          "lastError": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Short description of the most recent failure, if any."
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "lastAttemptAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "deliveredAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "nextAttemptAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When the next retry is scheduled, for a delivery still being retried. Absent once a delivery is delivered or permanently failed."
+          }
+        }
+      },
       "WebhookEventType": {
         "type": "string",
-        "description": "Subscribable event type. tag.* events (tag.moved, tag.battery_low, tag.offline) are delivered by the API event monitor. Delivery is off by default at launch: a newly created subscription begins receiving tag.* deliveries automatically once delivery is enabled for production — no changes are needed on your side, and existing subscriptions activate on their own. Delivery is best-effort and at-most-once: a failed POST (non-2xx or timeout) is NOT retried in v1, so treat webhooks as a low-latency notification and reconcile against GET /v1/fleet/delta (or the tag reads) as the durable source of truth. geofence.* events (geofence.entry, geofence.exit, geofence.dwell) may be subscribed to for forward compatibility but are NOT delivered to API-managed subscriptions in v1 — geofence alerts are delivered only to the integrations selected in a geofence's own alert configuration. POST /v1/webhooks/{webhookId}/test always delivers a sample signed event so you can verify connectivity and signature handling regardless of these gates.",
+        "description": "Subscribable event type. tag.* events (tag.moved, tag.battery_low, tag.offline) are delivered by the API event monitor. geofence.* events (geofence.entry, geofence.exit, geofence.dwell) are delivered by the API geofence event monitor and mirror the entry/exit/dwell transitions of your geofences. Each monitor is independently operator-gated and off by default at launch: a newly created subscription begins receiving deliveries automatically once delivery is enabled for production — no changes are needed on your side, and existing subscriptions activate on their own. Delivery is at-least-once: a failed POST (non-2xx or timeout) is retried automatically with exponential backoff for several attempts before being marked permanently failed. Because of retries the same event may arrive more than once, so make your handler idempotent by de-duplicating on the payload `id` field. Inspect delivery status and attempts via GET /v1/webhooks/{webhookId}/deliveries. Webhooks remain a low-latency notification, not a ledger: reconcile against GET /v1/fleet/delta (or the tag / geofence reads) as the durable source of truth. API-managed geofence.* deliveries are independent of the per-geofence alert configuration in the app: subscribing here does not change which integrations a geofence emails or notifies, and vice versa. POST /v1/webhooks/{webhookId}/test always delivers a sample signed event so you can verify connectivity and signature handling regardless of these gates.",
         "enum": [
           "geofence.entry",
           "geofence.exit",
@@ -1384,7 +2070,7 @@
             "items": {
               "$ref": "#/components/schemas/WebhookEventType"
             },
-            "description": "Event types to subscribe to. Omit to subscribe to all types. Delivery gating still applies: tag.* is operator-gated (off by default) and geofence.* is not delivered to API-managed subscriptions in v1 — see WebhookEventType."
+            "description": "Event types to subscribe to. Omit to subscribe to all types. Delivery gating still applies: tag.* and geofence.* are each independently operator-gated (off by default) — see WebhookEventType."
           },
           "label": {
             "type": "string",
@@ -1412,6 +2098,105 @@
           },
           "active": {
             "type": "boolean"
+          }
+        }
+      },
+      "GeofenceCenter": {
+        "type": "object",
+        "required": [
+          "lat",
+          "lng"
+        ],
+        "properties": {
+          "lat": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "lng": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          }
+        }
+      },
+      "GeofenceAlertsInput": {
+        "type": "object",
+        "description": "Dwell alerting. Entry and exit are always tracked, so they are not settable here; in-app email and push channels are dashboard-only and cannot be enabled by an API write. An unrecognized field (e.g. onEntry, emailEnabled) is rejected with `invalid_geofence` rather than silently ignored.",
+        "properties": {
+          "dwellEnabled": {
+            "type": "boolean",
+            "description": "Emit a `geofence.dwell` event when a tag stays outside for dwellMinutes (a \"still outside\" reminder). When true, dwellMinutes is required (here or already stored)."
+          },
+          "dwellMinutes": {
+            "type": "integer",
+            "minimum": 30,
+            "maximum": 20160,
+            "description": "Dwell threshold in minutes (30 to 20160 = 14 days)."
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateGeofenceRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "center",
+          "radiusMeters",
+          "targetTagIds"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Display name, 1–200 characters."
+          },
+          "center": {
+            "$ref": "#/components/schemas/GeofenceCenter"
+          },
+          "radiusMeters": {
+            "type": "number",
+            "minimum": 10,
+            "maximum": 100000,
+            "description": "Circle radius in meters (10 to 100000)."
+          },
+          "targetTagIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "description": "Tag ids to monitor (1 to 200), or the single sentinel `[\"all\"]` to monitor every tag in the workspace. The sentinel and any explicit id must be within the key's tag scope, and each explicit id must resolve to a real tag."
+          },
+          "alerts": {
+            "$ref": "#/components/schemas/GeofenceAlertsInput"
+          }
+        }
+      },
+      "UpdateGeofenceRequest": {
+        "type": "object",
+        "description": "Any subset of fields. Omitted fields are left unchanged. Supplying only one of center / radiusMeters edits that part of the circle and re-validates the result against the stored value.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Display name, 1–200 characters."
+          },
+          "center": {
+            "$ref": "#/components/schemas/GeofenceCenter"
+          },
+          "radiusMeters": {
+            "type": "number",
+            "minimum": 10,
+            "maximum": 100000
+          },
+          "targetTagIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "alerts": {
+            "$ref": "#/components/schemas/GeofenceAlertsInput"
           }
         }
       },
@@ -1471,6 +2256,110 @@
           }
         }
       },
+      "GeofenceWebhookDelivery": {
+        "type": "object",
+        "description": "The JSON body TagLogger POSTs to your endpoint for a geofence.* event delivery. Same envelope as TagWebhookDelivery; `data` carries the geofence and the location at the transition.",
+        "required": [
+          "id",
+          "event",
+          "occurredAt",
+          "test",
+          "tag",
+          "data"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique delivery id; safe to use as an idempotency key."
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "geofence.entry",
+              "geofence.exit",
+              "geofence.dwell"
+            ]
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the transition was recorded."
+          },
+          "test": {
+            "type": "boolean",
+            "description": "True only for deliveries triggered by the /test endpoint."
+          },
+          "tag": {
+            "type": "object",
+            "description": "The tag that crossed the geofence boundary.",
+            "properties": {
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "hardwareId": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "description": "Geofence transition payload.",
+            "properties": {
+              "geofence": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The geofence identifier."
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "The geofence display name."
+                  }
+                }
+              },
+              "location": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "The tag location at the transition, or null if unavailable.",
+                "properties": {
+                  "lat": {
+                    "type": "number"
+                  },
+                  "lng": {
+                    "type": "number"
+                  }
+                }
+              },
+              "dwellMinutes": {
+                "type": "integer",
+                "description": "Present only on geofence.dwell: the configured dwell threshold in minutes."
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
       "ListEnvelope": {
         "type": "object",
         "required": [
@@ -1488,6 +2377,252 @@
               "null"
             ],
             "description": "Pass as `cursor` for the next page; null at the end."
+          }
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "description": "Plan summary for the workspace.",
+        "properties": {
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Subscription status, e.g. `active`, `trialing`, `past_due`, or `cancelled`. Null if the workspace has no plan on record."
+          },
+          "seats": {
+            "type": "integer",
+            "description": "Number of seats (tags) the plan covers."
+          },
+          "billingCycle": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "monthly",
+              "annual",
+              null
+            ],
+            "description": "Billing interval, or null if not on a recurring plan."
+          },
+          "billingSource": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "stripe",
+              "invoice",
+              null
+            ],
+            "description": "How the workspace is billed, or null if unknown."
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "description": "The workspace that owns the API key.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable workspace identifier."
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "displayName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "companyName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "apiEnabled": {
+            "type": "boolean",
+            "description": "Whether the Developer API is enabled for this workspace."
+          },
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          }
+        }
+      },
+      "UsageDay": {
+        "type": "object",
+        "description": "Request count for a single UTC day.",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "UTC calendar day (YYYY-MM-DD)."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of API requests this key made that day."
+          }
+        }
+      },
+      "Usage": {
+        "type": "object",
+        "description": "Per-day API request counts for one key.",
+        "properties": {
+          "keyId": {
+            "type": "string",
+            "description": "The calling key's identifier (usage is per key, not per workspace)."
+          },
+          "days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageDay"
+            },
+            "description": "Oldest-to-newest, one entry per day in the requested window. Days with no traffic report count 0."
+          },
+          "totalRequests": {
+            "type": "integer",
+            "description": "Sum of `count` across the returned days."
+          }
+        }
+      },
+      "ShareLink": {
+        "type": "object",
+        "description": "A public, expiring share link for a single tag. Anyone holding the `url` can view that tag's current location until the link expires or is revoked.",
+        "required": [
+          "id",
+          "tagId",
+          "url",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable share-link identifier. Use it on `/v1/share-links/{shareLinkId}`."
+          },
+          "tagId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The shared tag's identifier."
+          },
+          "tagName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The tag's display name captured when the link was minted."
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "description": "The public share URL. The unguessable token is part of this URL — treat it as a capability and share it only with intended viewers."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "expired",
+              "revoked"
+            ],
+            "description": "Lifecycle state: `active` resolves; `expired` passed its expiry; `revoked` was revoked."
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "expiresAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When the link stops resolving. API-minted links always carry an expiry."
+          },
+          "revokedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When the link was revoked, or null if it has not been revoked."
+          },
+          "accessCountTotal": {
+            "type": "integer",
+            "description": "Total number of times the link has been viewed."
+          },
+          "accessCountUnique": {
+            "type": "integer",
+            "description": "Approximate number of distinct viewers."
+          },
+          "lastAccessedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When the link was last viewed, or null if never."
+          }
+        }
+      },
+      "CreateShareLinkRequest": {
+        "type": "object",
+        "required": [
+          "tagId"
+        ],
+        "description": "Provide at most one of `expiresInSeconds` or `expiresAt`. Omitting both defaults to the maximum share-link lifetime (90 days unless the workspace is configured otherwise). API-minted links can never be set to never-expire.",
+        "properties": {
+          "tagId": {
+            "type": "string",
+            "description": "The tag to share. Must be linked to hardware; within the key's tag scope."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional display name to snapshot onto the link. Defaults to the tag's current name."
+          },
+          "expiresInSeconds": {
+            "type": "integer",
+            "minimum": 60,
+            "description": "Lifetime from now, in seconds. Minimum 60; clamped to the maximum share-link lifetime."
+          },
+          "expiresAt": {
+            "description": "Absolute expiry as an ISO 8601 timestamp or epoch milliseconds. Must be at least 60 seconds out and within the maximum lifetime.",
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           }
         }
       }
@@ -1630,6 +2765,84 @@
           }
         }
       },
+      "TagBattery": {
+        "description": "The tag's battery status.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/BatteryStatus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Account": {
+        "description": "The current workspace.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Usage": {
+        "description": "Per-day request counts for the calling key.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/Usage"
+                }
+              }
+            }
+          }
+        }
+      },
       "FleetDelta": {
         "description": "A page of changed tags.",
         "headers": {
@@ -1722,6 +2935,40 @@
               "properties": {
                 "data": {
                   "$ref": "#/components/schemas/Geofence"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GeofenceDeleted": {
+        "description": "Deletion acknowledgement.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "deleted": {
+                      "type": "boolean"
+                    }
+                  }
                 }
               }
             }
@@ -1911,6 +3158,172 @@
                     },
                     "eventId": {
                       "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "WebhookDeliveryList": {
+        "description": "A page of delivery records, newest first.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ListEnvelope"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WebhookDelivery"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ShareLinkList": {
+        "description": "A page of share links.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ListEnvelope"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ShareLink"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ShareLink": {
+        "description": "A single share link.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/ShareLink"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ShareLinkCreated": {
+        "description": "The newly minted share link. The `url` (which contains the access token) is returned here; surface it to the intended viewer.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/ShareLink"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ShareLinkRevoked": {
+        "description": "The revoked share link with its updated status. Revoking is idempotent.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "revoked": {
+                      "type": "boolean"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "active",
+                        "expired",
+                        "revoked"
+                      ]
                     }
                   }
                 }
