@@ -1,28 +1,77 @@
-# TagLogger
+# TagLogger Developer API
 
-> AirTag-based asset tracking for operations teams. Track tools, vehicles, and field equipment with location history, geofence alerts, and inventory workflows — without heavy GPS hardware overhead.
+> Read tag locations and history, sync your fleet, and manage signed event webhooks.
 
-TagLogger ships pre-configured AirTag hardware (not standard consumer AirTags) with a web platform used by teams in construction, logistics, healthcare, equipment rental, and recycling. An independent service, not affiliated with Apple Inc.
+Base URL: served at this host under /v1 (e.g. https://api.taglogger.com/v1).
+Machine-readable spec: GET /v1/openapi.json (OpenAPI 3.1).
 
-## Hardware
+## Documentation
+Human-readable guides and references are hosted at https://taglogger.com/docs:
+- Quickstart:         https://taglogger.com/docs/quickstart
+- Authentication:     https://taglogger.com/docs/authentication
+- API keys:           https://taglogger.com/docs/api-keys
+- Endpoint reference: https://taglogger.com/docs/api-reference/endpoints
+- Error reference:    https://taglogger.com/docs/api-reference/errors
+- Webhooks guide:     https://taglogger.com/docs/webhooks/overview
+- OpenAPI spec:       https://taglogger.com/docs/openapi
 
-- [Standard Tag — $15](https://taglogger.com/#pricing): compact, up to 1-year battery (CR2032)
-- [Standard Tag + Magnetic Holder — $21](https://taglogger.com/#pricing): magnetic mount for tools and vehicles
-- [Tag + Extended Battery Case — $45](https://taglogger.com/#pricing): up to 10-year battery on two AA cells
+## Authentication
+Send a workspace API key on every request (except docs), either as:
+  Authorization: Bearer <key>
+or:
+  X-API-Key: <key>
+Live keys are prefixed tl_live_, test keys tl_test_. Keys are scoped and revocable;
+the raw key is shown only once at creation.
 
-Monthly subscription starts at $10. Free U.S. shipping.
+## Scopes
+- read:tags        list/read tags and their current location summary
+- read:locations   precise current location, history, and fleet delta
+- read:geofences   list/read geofence configuration
+- manage:webhooks  create/read/update/delete/rotate/test webhook subscriptions
 
-## Platform
+## Conventions
+- List endpoints return { data, nextCursor }. Pass nextCursor back as ?cursor= for the next page; null means end.
+- Timestamps are ISO-8601; time-range params also accept epoch milliseconds.
+- Rate-limit headers: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset. 429 includes Retry-After.
+- Errors: { "error": { "code": string, "message": string } }.
+- Coordinates are suppressed while a tag's recording is paused (recordingPaused: true).
 
-- [Pricing](https://taglogger.com/#pricing)
-- [How it works](https://taglogger.com/#how-it-works)
-- [Platform features](https://taglogger.com/#platform-features)
-- [Industries](https://taglogger.com/#industries)
-- [FAQ](https://taglogger.com/#faq)
-- [Contact sales](https://taglogger.com/contact/)
-- [Personal-use waitlist](https://taglogger.com/personal-use/)
+## Endpoints
+GET  /v1/tags                          List tags (read:tags)
+GET  /v1/tags/{tagId}                  Get a tag (read:tags)
+GET  /v1/tags/{tagId}/location         Current location (read:locations)
+GET  /v1/tags/{tagId}/history          Location history; params: start,end,order,limit,cursor (read:locations)
+GET  /v1/fleet/delta                   Changed tags since ?since=; params: limit,cursor (read:locations)
+GET  /v1/geofences                     List geofences (read:geofences)
+GET  /v1/geofences/{geofenceId}        Get a geofence (read:geofences)
+GET  /v1/webhooks                      List webhook subscriptions (manage:webhooks)
+POST /v1/webhooks                      Create a subscription; returns signing secret once (manage:webhooks)
+GET  /v1/webhooks/{webhookId}          Get a subscription (manage:webhooks)
+PATCH /v1/webhooks/{webhookId}         Update url/events/label/active (manage:webhooks)
+DELETE /v1/webhooks/{webhookId}        Delete a subscription (manage:webhooks)
+POST /v1/webhooks/{webhookId}/rotate-secret  Rotate signing secret; returns it once (manage:webhooks)
+POST /v1/webhooks/{webhookId}/test     Send a test delivery (manage:webhooks)
 
-## Legal
+## Webhook events
+tag.moved, tag.battery_low, tag.offline are delivered by the API event monitor.
+  Delivery is off by default at launch: a new subscription begins receiving tag.*
+  deliveries automatically once delivery is enabled (no changes needed on your side).
+  Delivery is best-effort / at-most-once: a failed POST is NOT retried in v1, so
+  reconcile against GET /v1/fleet/delta (the durable source of truth), not webhooks.
+geofence.entry, geofence.exit, geofence.dwell can be subscribed to for forward
+  compatibility but are NOT delivered to API-managed subscriptions in v1 (geofence
+  alerts are sent only to integrations chosen in a geofence's own alert settings).
 
-- [Privacy Policy](https://taglogger.com/privacy/)
-- [Terms and Conditions](https://taglogger.com/terms/)
+## Webhook delivery format
+tag.* deliveries are HTTP POST with this JSON body:
+  { "id": "<unique delivery id>", "event": "tag.moved", "occurredAt": "<ISO-8601>",
+    "test": false, "tag": { "id": "<tagId>", "name": "<label|null>",
+    "hardwareId": "<hwId>" }, "data": { ...event-specific... } }
+Per-event data field:
+  tag.moved        { from: {lat,lng}, to: {lat,lng}, distanceMeters }
+  tag.battery_low  { status, critical }
+  tag.offline      { lastSeenAt, staleSeconds }
+Signature: header X-TagLogger-Signature: sha256=<hex HMAC-SHA256 of the raw JSON
+  body using your signing secret>. Verify it before trusting a delivery.
+POST /v1/webhooks/{id}/test sends a sample signed event (test:true) so you can verify
+  connectivity and signature handling during onboarding.

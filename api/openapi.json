@@ -1,0 +1,2031 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "TagLogger Developer API",
+    "version": "1.0.0",
+    "license": {
+      "name": "Proprietary"
+    },
+    "summary": "Read tag locations and history, sync your fleet, and manage signed event webhooks.",
+    "description": "The TagLogger Developer API exposes your workspace's tag locations, location history,\ngeofence configuration, and outbound event webhooks over a versioned REST surface.\n\n## Authentication\nEvery request (except these docs) requires a workspace API key, sent either as\n`Authorization: Bearer <key>` or as the `X-API-Key` header. Keys are scoped and\nrevocable; the raw key is shown only once at creation. Live keys are prefixed\n`tl_live_` and test keys `tl_test_`.\n\n## Scopes\n- `read:tags` — list and read tags and their current location summary.\n- `read:locations` — read precise current location, location history, and fleet delta.\n- `read:geofences` — list and read geofence configuration.\n- `manage:webhooks` — create, read, update, delete, rotate, and test webhook subscriptions.\n\n## Pagination\nList endpoints return `{ data, nextCursor }`. When `nextCursor` is non-null, pass it back\nas the `cursor` query parameter to fetch the next page; a null `nextCursor` means the end.\n\n## Rate limits\nResponses carry `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset`.\nExceeding the limit returns `429` with a `Retry-After` header.\n\n## Errors\nErrors use the envelope `{ \"error\": { \"code\": string, \"message\": string } }`.",
+    "contact": {
+      "name": "TagLogger API documentation",
+      "url": "https://taglogger.com/docs/quickstart"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.taglogger.com",
+      "description": "TagLogger API"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    },
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Tags",
+      "description": "Tag inventory, current location, and history."
+    },
+    {
+      "name": "Fleet",
+      "description": "Sync primitives for keeping a local mirror up to date."
+    },
+    {
+      "name": "Geofences",
+      "description": "Read geofence configuration."
+    },
+    {
+      "name": "Webhooks",
+      "description": "Manage signed outbound event subscriptions."
+    },
+    {
+      "name": "Meta",
+      "description": "Machine-readable documentation."
+    }
+  ],
+  "paths": {
+    "/v1/tags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "listTags",
+        "summary": "List tags",
+        "description": "Returns the workspace's tags. Honors the key's tag scope (a scoped key sees only its named tags). Requires `read:tags`.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum items to return (default 50, max 200). Values above 200 are clamped to 200; a missing, zero, negative, or non-numeric value falls back to 50 (the request is not rejected).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque pagination cursor from a prior response's `nextCursor`. Omit for the first page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/TagList"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/tags/{tagId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TagId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "getTag",
+        "summary": "Get a tag",
+        "description": "Returns a single tag. Out-of-scope or unknown tags both return 404 (no existence disclosure). Requires `read:tags`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Tag"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/tags/{tagId}/location": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TagId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "getTagLocation",
+        "summary": "Get a tag's current location",
+        "description": "Returns the tag's most recent location. `data` is null when there is no fix, no linked hardware, or recording is paused (`recordingPaused: true`). Requires `read:locations`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/TagLocation"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/tags/{tagId}/history": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TagId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "getTagHistory",
+        "summary": "Get a tag's location history",
+        "description": "Returns recorded location points in a time window (default: last 7 days). Not suppressed by recording pause — pause stops new points but never deletes the existing trail. Requires `read:locations`.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum items to return (default 200, max 1000). Values above 1000 are clamped to 1000; a missing, zero, negative, or non-numeric value falls back to 200 (the request is not rejected).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": 200
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque pagination cursor from a prior response's `nextCursor`. Omit for the first page.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "description": "Window start: ISO-8601 timestamp or epoch milliseconds (inclusive). Defaults to `end` minus 7 days.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "description": "Window end: ISO-8601 timestamp or epoch milliseconds (inclusive). Defaults to now.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort by timestamp.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "asc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/TagHistory"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/fleet/delta": {
+      "get": {
+        "tags": [
+          "Fleet"
+        ],
+        "operationId": "getFleetDelta",
+        "summary": "Fleet delta sync",
+        "description": "Returns tags whose location advanced after `since`, ordered for tie-safe pagination. Page with `cursor` until `nextCursor` is null, then carry the max `lastSeenAt` forward as the next `since`. Requires `read:locations`.",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "required": false,
+            "description": "Return tags seen strictly after this time: ISO-8601 or epoch milliseconds (exclusive). Defaults to the epoch (full sync).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum items to return (default 100, max 500). Values above 500 are clamped to 500; a missing, zero, negative, or non-numeric value falls back to 100 (the request is not rejected).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque pagination cursor from a prior response's `nextCursor`. Omit for the first page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/FleetDelta"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/geofences": {
+      "get": {
+        "tags": [
+          "Geofences"
+        ],
+        "operationId": "listGeofences",
+        "summary": "List geofences",
+        "description": "Returns the workspace's geofence configuration. Requires `read:geofences`.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum items to return (default 50, max 200). Values above 200 are clamped to 200; a missing, zero, negative, or non-numeric value falls back to 50 (the request is not rejected).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque pagination cursor from a prior response's `nextCursor`. Omit for the first page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GeofenceList"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/geofences/{geofenceId}": {
+      "parameters": [
+        {
+          "name": "geofenceId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Geofences"
+        ],
+        "operationId": "getGeofence",
+        "summary": "Get a geofence",
+        "description": "Returns a single geofence configuration. Requires `read:geofences`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Geofence"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/webhooks": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "listWebhooks",
+        "summary": "List webhook subscriptions",
+        "description": "Returns the workspace's API-managed webhook subscriptions. Signing secrets are never returned on reads. Requires `manage:webhooks`.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum items to return (default 50, max 200). Values above 200 are clamped to 200; a missing, zero, negative, or non-numeric value falls back to 50 (the request is not rejected).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque pagination cursor from a prior response's `nextCursor`. Omit for the first page.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookList"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "createWebhook",
+        "summary": "Create a webhook subscription",
+        "description": "Registers an HTTPS endpoint for signed event deliveries. The signing secret is returned exactly once in this response. Requires `manage:webhooks`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWebhookRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/WebhookCreated"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/webhooks/{webhookId}": {
+      "parameters": [
+        {
+          "name": "webhookId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "getWebhook",
+        "summary": "Get a webhook subscription",
+        "description": "Returns a single webhook subscription (no signing secret). Requires `manage:webhooks`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Webhook"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "updateWebhook",
+        "summary": "Update a webhook subscription",
+        "description": "Updates url, events, label, and/or active state. Requires `manage:webhooks`.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchWebhookRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Webhook"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "deleteWebhook",
+        "summary": "Delete a webhook subscription",
+        "description": "Permanently deletes the subscription. Requires `manage:webhooks`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookDeleted"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/webhooks/{webhookId}/rotate-secret": {
+      "parameters": [
+        {
+          "name": "webhookId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "rotateWebhookSecret",
+        "summary": "Rotate a webhook signing secret",
+        "description": "Generates a new signing secret and returns it once. The previous secret stops being valid immediately. Requires `manage:webhooks`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookWithSecret"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/webhooks/{webhookId}/test": {
+      "parameters": [
+        {
+          "name": "webhookId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "operationId": "testWebhook",
+        "summary": "Send a test delivery",
+        "description": "Synthesizes a sample signed `tag.moved` event (test: true) and delivers it to the subscription's URL through the same signing and transport path as production deliveries, returning whether the endpoint accepted it. Requires `manage:webhooks`.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/WebhookTestResult"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v1/openapi.json": {
+      "get": {
+        "tags": [
+          "Meta"
+        ],
+        "operationId": "getOpenApiSpec",
+        "summary": "This OpenAPI document",
+        "security": [],
+        "description": "Returns this OpenAPI 3.1 specification. Public; no authentication required.",
+        "responses": {
+          "200": {
+            "description": "OpenAPI 3.1 document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/llms.txt": {
+      "get": {
+        "tags": [
+          "Meta"
+        ],
+        "operationId": "getLlmsTxt",
+        "summary": "LLM-friendly API summary",
+        "security": [],
+        "description": "Returns a plaintext, LLM-friendly overview of the API. Public; no authentication required.",
+        "responses": {
+          "200": {
+            "description": "Plaintext API summary.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {
+    "tag.moved": {
+      "post": {
+        "operationId": "webhookTagMoved",
+        "summary": "A tag moved farther than the movement threshold since its last anchor point.",
+        "description": "TagLogger sends this POST to your subscription URL. Respond 2xx to acknowledge. Verify the X-TagLogger-Signature header before trusting the body.",
+        "parameters": [
+          {
+            "name": "X-TagLogger-Signature",
+            "in": "header",
+            "required": false,
+            "description": "sha256=<hex HMAC-SHA256 of the raw request body, computed with the subscription's signing secret>. Always present for API-created subscriptions (they always have a signing secret).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagWebhookDelivery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures; v1 does not automatically retry."
+          }
+        }
+      }
+    },
+    "tag.battery_low": {
+      "post": {
+        "operationId": "webhookTagBatteryLow",
+        "summary": "A tag reported a low (status 3) or critical (status 4) battery level.",
+        "description": "TagLogger sends this POST to your subscription URL. Respond 2xx to acknowledge. Verify the X-TagLogger-Signature header before trusting the body.",
+        "parameters": [
+          {
+            "name": "X-TagLogger-Signature",
+            "in": "header",
+            "required": false,
+            "description": "sha256=<hex HMAC-SHA256 of the raw request body, computed with the subscription's signing secret>. Always present for API-created subscriptions (they always have a signing secret).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagWebhookDelivery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures; v1 does not automatically retry."
+          }
+        }
+      }
+    },
+    "tag.offline": {
+      "post": {
+        "operationId": "webhookTagOffline",
+        "summary": "A tag stopped reporting locations for longer than the offline threshold.",
+        "description": "TagLogger sends this POST to your subscription URL. Respond 2xx to acknowledge. Verify the X-TagLogger-Signature header before trusting the body.",
+        "parameters": [
+          {
+            "name": "X-TagLogger-Signature",
+            "in": "header",
+            "required": false,
+            "description": "sha256=<hex HMAC-SHA256 of the raw request body, computed with the subscription's signing secret>. Always present for API-created subscriptions (they always have a signing secret).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagWebhookDelivery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "description": "Any 2xx response acknowledges the delivery. Non-2xx responses and timeouts are treated as failures; v1 does not automatically retry."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Workspace API key sent as `Authorization: Bearer <key>`."
+      },
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "Workspace API key sent as the `X-API-Key` header."
+      }
+    },
+    "parameters": {
+      "TagId": {
+        "name": "tagId",
+        "in": "path",
+        "required": true,
+        "description": "The tag's identifier.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "headers": {
+      "X-RateLimit-Limit": {
+        "description": "Requests permitted per fixed window for this key tier.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "X-RateLimit-Remaining": {
+        "description": "Requests remaining in the current window.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "X-RateLimit-Reset": {
+        "description": "Unix epoch seconds at which the current window resets.",
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Stable machine-readable error code. Two distinct codes share HTTP 403: `forbidden` (the key lacks the required scope — fix the key's scopes) and `api_disabled` (the Developer API is not enabled for the workspace — create an API key in your dashboard to enable it). Two share HTTP 429: `rate_limited` (the per-key request budget; honor the X-RateLimit-* and Retry-After headers) and `too_many_requests` (the per-IP authentication-failure backstop on unauthenticated traffic).",
+                "enum": [
+                  "unauthorized",
+                  "forbidden",
+                  "api_disabled",
+                  "not_found",
+                  "method_not_allowed",
+                  "unsupported_media_type",
+                  "limit_exceeded",
+                  "rate_limited",
+                  "too_many_requests",
+                  "invalid_body",
+                  "invalid_url",
+                  "invalid_events",
+                  "invalid_label",
+                  "invalid_active",
+                  "invalid_range",
+                  "internal"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "BatteryStatus": {
+        "type": "object",
+        "description": "Battery state. `level` is reserved and currently always null; `status` is the raw battery status code.",
+        "properties": {
+          "level": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "LocationSummary": {
+        "type": "object",
+        "description": "Coarse last-known position (coordinates + timestamp only).",
+        "properties": {
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "timestampMs": {
+            "type": "integer",
+            "description": "Same instant as `timestamp`, in epoch milliseconds (parity with LocationPoint)."
+          }
+        }
+      },
+      "LocationPoint": {
+        "type": "object",
+        "description": "A recorded location fix.",
+        "properties": {
+          "lat": {
+            "type": "number"
+          },
+          "lng": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "timestampMs": {
+            "type": "integer"
+          },
+          "accuracy": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Horizontal accuracy in meters."
+          },
+          "altitude": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "verticalAccuracy": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "positionType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "floorLevel": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "isInaccurate": {
+            "type": "boolean"
+          },
+          "isOld": {
+            "type": "boolean"
+          },
+          "locationFinished": {
+            "type": "boolean"
+          },
+          "battery": {
+            "type": "object",
+            "properties": {
+              "level": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "status": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Provisioning status, e.g. `pending_hardware` or `linked`."
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "hardwareId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "battery": {
+            "$ref": "#/components/schemas/BatteryStatus"
+          },
+          "lastLocation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LocationSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastSeenAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "recordingPaused": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FleetDeltaItem": {
+        "type": "object",
+        "properties": {
+          "tagId": {
+            "type": "string"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hardwareId": {
+            "type": "string"
+          },
+          "lastSeenAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "recordingPaused": {
+            "type": "boolean"
+          },
+          "battery": {
+            "$ref": "#/components/schemas/BatteryStatus"
+          },
+          "location": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LocationPoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "Geofence": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "center": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "lat": {
+                    "type": "number"
+                  },
+                  "lng": {
+                    "type": "number"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "radiusMeters": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "targetTagIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tag ids this geofence targets; may include the sentinel `all`."
+          },
+          "targetsAllTags": {
+            "type": "boolean"
+          },
+          "alerts": {
+            "type": "object",
+            "properties": {
+              "onEntry": {
+                "type": "boolean"
+              },
+              "onExit": {
+                "type": "boolean"
+              },
+              "dwellEnabled": {
+                "type": "boolean"
+              },
+              "dwellMinutes": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "emailEnabled": {
+                "type": "boolean"
+              },
+              "emailAddress": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "pushEnabled": {
+                "type": "boolean"
+              },
+              "webhookEnabled": {
+                "type": "boolean"
+              },
+              "webhookTargetIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "Webhook": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            }
+          },
+          "signingSecretSet": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "WebhookWithSecret": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Webhook"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "signingSecret": {
+                "type": "string",
+                "description": "The HMAC signing secret (prefix `whsec_`). Shown only at creation and rotation."
+              }
+            }
+          }
+        ]
+      },
+      "WebhookEventType": {
+        "type": "string",
+        "description": "Subscribable event type. tag.* events (tag.moved, tag.battery_low, tag.offline) are delivered by the API event monitor. Delivery is off by default at launch: a newly created subscription begins receiving tag.* deliveries automatically once delivery is enabled for production — no changes are needed on your side, and existing subscriptions activate on their own. Delivery is best-effort and at-most-once: a failed POST (non-2xx or timeout) is NOT retried in v1, so treat webhooks as a low-latency notification and reconcile against GET /v1/fleet/delta (or the tag reads) as the durable source of truth. geofence.* events (geofence.entry, geofence.exit, geofence.dwell) may be subscribed to for forward compatibility but are NOT delivered to API-managed subscriptions in v1 — geofence alerts are delivered only to the integrations selected in a geofence's own alert configuration. POST /v1/webhooks/{webhookId}/test always delivers a sample signed event so you can verify connectivity and signature handling regardless of these gates.",
+        "enum": [
+          "geofence.entry",
+          "geofence.exit",
+          "geofence.dwell",
+          "tag.moved",
+          "tag.battery_low",
+          "tag.offline"
+        ]
+      },
+      "CreateWebhookRequest": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "HTTPS endpoint to receive deliveries. Must be public (SSRF-guarded); max 2000 chars."
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            },
+            "description": "Event types to subscribe to. Omit to subscribe to all types. Delivery gating still applies: tag.* is operator-gated (off by default) and geofence.* is not delivered to API-managed subscriptions in v1 — see WebhookEventType."
+          },
+          "label": {
+            "type": "string",
+            "description": "Optional human label, max 120 characters. A longer value is rejected with `invalid_label` (it is not silently truncated). Omit to default to \"API webhook\"."
+          }
+        }
+      },
+      "PatchWebhookRequest": {
+        "type": "object",
+        "description": "Any subset of fields. Omitted fields are left unchanged.",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebhookEventType"
+            }
+          },
+          "label": {
+            "type": "string",
+            "description": "Human label, 1–120 characters. Empty/blank or a value over 120 characters is rejected with `invalid_label`."
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TagWebhookDelivery": {
+        "type": "object",
+        "description": "The JSON body TagLogger POSTs to your endpoint for a tag.* event delivery.",
+        "required": [
+          "id",
+          "event",
+          "occurredAt",
+          "test",
+          "tag",
+          "data"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique delivery id; safe to use as an idempotency key."
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "tag.moved",
+              "tag.battery_low",
+              "tag.offline"
+            ]
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "test": {
+            "type": "boolean",
+            "description": "True only for deliveries triggered by the /test endpoint."
+          },
+          "tag": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "hardwareId": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "description": "Event-specific payload. tag.moved: { from: {lat,lng}, to: {lat,lng}, distanceMeters }. tag.battery_low: { status, critical }. tag.offline: { lastSeenAt, staleSeconds }.",
+            "additionalProperties": true
+          }
+        }
+      },
+      "ListEnvelope": {
+        "type": "object",
+        "required": [
+          "data",
+          "nextCursor"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {}
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Pass as `cursor` for the next page; null at the end."
+          }
+        }
+      }
+    },
+    "responses": {
+      "TagList": {
+        "description": "A page of tags.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ListEnvelope"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Tag"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Tag": {
+        "description": "A single tag.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TagLocation": {
+        "description": "The tag's current location (null when unavailable or paused).",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/LocationPoint"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "recordingPaused": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TagHistory": {
+        "description": "A page of historical location points.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ListEnvelope"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/LocationPoint"
+                      }
+                    },
+                    "recordingPaused": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "FleetDelta": {
+        "description": "A page of changed tags.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ListEnvelope"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FleetDeltaItem"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "GeofenceList": {
+        "description": "A page of geofences.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ListEnvelope"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Geofence"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Geofence": {
+        "description": "A single geofence.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/Geofence"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WebhookList": {
+        "description": "A page of webhook subscriptions.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/ListEnvelope"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Webhook"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "Webhook": {
+        "description": "A single webhook subscription (no secret).",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/Webhook"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WebhookCreated": {
+        "description": "The created webhook, including the one-time signing secret.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/WebhookWithSecret"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WebhookWithSecret": {
+        "description": "The webhook with a freshly rotated signing secret.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/WebhookWithSecret"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WebhookDeleted": {
+        "description": "Deletion acknowledgement.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "deleted": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "WebhookTestResult": {
+        "description": "The test delivery outcome. `delivered` is true when the endpoint returned 2xx. `eventId` is the delivered envelope's `id` (the value the endpoint received and can echo for correlation).",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "delivered": {
+                      "type": "boolean"
+                    },
+                    "event": {
+                      "type": "string",
+                      "enum": [
+                        "tag.moved"
+                      ]
+                    },
+                    "eventId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "The request was malformed or a parameter was invalid.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Missing, invalid, or revoked API key.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "The key lacks the required scope, or the Developer API is not enabled for the workspace.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The resource does not exist or is out of the key's scope.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "A workspace limit was exceeded.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "An unexpected server error (error code `internal`). Safe to retry with exponential backoff.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "description": "The HTTP method is not allowed for this path.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "UnsupportedMediaType": {
+        "description": "The request body was sent with a Content-Type other than application/json.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "RateLimited": {
+        "description": "Rate limit exceeded.",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/X-RateLimit-Limit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/X-RateLimit-Remaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "Retry-After": {
+            "description": "Seconds to wait before retrying.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
