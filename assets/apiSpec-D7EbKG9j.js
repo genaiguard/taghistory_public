@@ -1,0 +1,1 @@
+let e=null;async function n(){if(e)return e;try{const r=await fetch("/api/openapi.json");if(!r.ok)throw new Error(`Failed to load API spec: ${r.status}`);return e=await r.json(),e}catch(r){return console.error("Error loading API specification:",r),null}}async function o(){return n()}export{o as f};

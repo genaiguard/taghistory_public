@@ -7,7 +7,7 @@
       "name": "Proprietary"
     },
     "summary": "Read tag locations and history, sync your fleet, manage geofences and signed event webhooks, and mint public tag share links.",
-    "description": "The TagLogger Developer API exposes your workspace's tag locations, location history,\ngeofence configuration, and outbound event webhooks over a versioned REST surface.\n\n## Authentication\nEvery request (except these docs) requires a workspace API key, sent either as\n`Authorization: Bearer <key>` or as the `X-API-Key` header. Keys are scoped and\nrevocable; the raw key is shown only once at creation. Live keys are prefixed\n`tl_live_` and test keys `tl_test_`.\n\n## Scopes\n- `read:tags` — list and read tags and their current location summary.\n- `read:locations` — read precise current location, location history, and fleet delta.\n- `read:geofences` — list and read geofence configuration.\n- `manage:geofences` — create, update, and delete geofences.\n- `manage:webhooks` — create, read, update, delete, rotate, and test webhook subscriptions.\n- `read:share-links` — list and read tag share links.\n- `manage:share-links` — create and revoke tag share links.\n\n## Pagination\nList endpoints return `{ data, nextCursor }`. When `nextCursor` is non-null, pass it back\nas the `cursor` query parameter to fetch the next page; a null `nextCursor` means the end.\n\n## Rate limits\nResponses carry `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset`.\nExceeding the limit returns `429` with a `Retry-After` header.\n\n## Errors\nErrors use the envelope `{ \"error\": { \"code\": string, \"message\": string } }`.",
+    "description": "The TagLogger Developer API exposes your workspace's tag locations, location history,\ngeofence configuration, and outbound event webhooks over a versioned REST surface.\n\n## Authentication\nEvery request (except these docs) requires a workspace API key, sent either as\n`Authorization: Bearer <key>` or as the `X-API-Key` header. Keys are scoped and\nrevocable; the raw key is shown only once at creation. Live keys are prefixed\n`tl_live_` and test keys `tl_test_`.\n\n## Scopes\n- `read:tags` — list and read tags and their current location summary.\n- `read:locations` — read precise current location, location history, and fleet delta.\n- `read:geofences` — list and read geofence configuration.\n- `manage:geofences` — create, update, and delete geofences.\n- `manage:webhooks` — create, read, update, delete, rotate, and test webhook subscriptions.\n- `read:share-links` — list and read tag share links.\n- `manage:share-links` — create and revoke tag share links.\n\n## Pagination\nList endpoints return `{ data, nextCursor }`. When `nextCursor` is non-null, pass it back\nas the `cursor` query parameter to fetch the next page; a null `nextCursor` means the end.\n\n## Idempotency\nCreate endpoints (POST `/v1/geofences`, `/v1/webhooks`, `/v1/share-links`) accept an\noptional `Idempotency-Key` request header so a retry after a network failure does not\ncreate a duplicate. Pick a unique key per logical create (a UUID is ideal). The first\nrequest runs and its response is recorded; a later request with the same key replays that\nrecorded response and adds an `Idempotent-Replayed: true` header, instead of creating a\nsecond resource. Reusing a key with a different request body returns `409`\n`idempotency_key_reused`; a request with the same key still in flight returns `409`\n`idempotency_conflict` (retry shortly). Keys are scoped to your workspace and recorded\nresponses expire after 24 hours. The header is optional — omit it and the endpoint behaves\nexactly as before.\n\n## Rate limits\nResponses carry both header families with identical budget values: the legacy\n`X-RateLimit-Limit` / `X-RateLimit-Remaining` / `X-RateLimit-Reset` set (where\n`X-RateLimit-Reset` is a Unix epoch in seconds) and the IETF-standard\n`RateLimit-Limit` / `RateLimit-Remaining` / `RateLimit-Reset` set (where\n`RateLimit-Reset` is delta-seconds until the window resets). Prefer the\n`RateLimit-*` names in new integrations. Exceeding the limit returns `429`\nwith a `Retry-After` header.\n\n## Versioning & deprecation\nThe API is versioned in the path (`/v1`). Additive, backward-compatible changes\n(new endpoints, new optional fields, new enum values on response-only fields) ship\nwithin `/v1` without notice, so write tolerant clients: ignore unknown JSON fields,\nand treat an unrecognized response-side enum value (for example an error `code` or a\nwebhook `event`) by its HTTP status and human-readable message rather than failing.\nBreaking changes are introduced under a new version path (`/v2`); `/v1` is not removed\nout from under you. When an endpoint or version is scheduled for retirement we announce\nit in the changelog and emit RFC 8594 `Deprecation` and `Sunset` response headers ahead\nof the end-of-life date.\n\n## Errors\nErrors use the envelope `{ \"error\": { \"code\": string, \"message\": string } }`.\nThe `code` set may grow over time; match on it when you recognize it and fall back to\nthe HTTP status otherwise.",
     "contact": {
       "name": "TagLogger API documentation",
       "url": "https://taglogger.com/docs/quickstart"
@@ -441,7 +441,12 @@
         ],
         "operationId": "createGeofence",
         "summary": "Create a geofence",
-        "description": "Creates a circular geofence. Entry and exit are always tracked; subscribe a webhook to `geofence.entry` / `geofence.exit` / `geofence.dwell` to receive events. In-app email and push channels are dashboard-only and are never enabled by an API write. Requires `manage:geofences`.",
+        "description": "Creates a circular geofence. Entry and exit are always tracked; subscribe a webhook to `geofence.entry` / `geofence.exit` / `geofence.dwell` to receive events. In-app email and push channels are dashboard-only and are never enabled by an API write. Send an `Idempotency-Key` header to make a retry safe. Requires `manage:geofences`.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -662,7 +667,12 @@
         ],
         "operationId": "createWebhook",
         "summary": "Create a webhook subscription",
-        "description": "Registers an HTTPS endpoint for signed event deliveries. The signing secret is returned exactly once in this response. Requires `manage:webhooks`.",
+        "description": "Registers an HTTPS endpoint for signed event deliveries. The signing secret is returned exactly once in this response. Send an `Idempotency-Key` header to make a retry safe. Requires `manage:webhooks`.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1044,7 +1054,12 @@
         ],
         "operationId": "createShareLink",
         "summary": "Create a tag share link",
-        "description": "Mints a public, expiring share link for a tag that is linked to hardware. Links always expire: send `expiresInSeconds` or `expiresAt`, or accept the default (90 days). API-minted links can never be set to never-expire. The share URL is returned exactly once in this response. Requires `manage:share-links`.",
+        "description": "Mints a public, expiring share link for a tag that is linked to hardware. Links always expire: send `expiresInSeconds` or `expiresAt`, or accept the default (90 days). API-minted links can never be set to never-expire. The share URL is returned exactly once in this response. Send an `Idempotency-Key` header to make a retry safe. Requires `manage:share-links`.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1507,9 +1522,25 @@
         "schema": {
           "type": "string"
         }
+      },
+      "IdempotencyKey": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": false,
+        "description": "Optional. A client-chosen unique string (max 255 printable-ASCII chars) that makes this create safe to retry: the first request runs and its response is recorded, and a later request with the same key replays that same response (with an `Idempotent-Replayed: true` header) instead of creating a duplicate. Reusing a key with a different request body returns 409 `idempotency_key_reused`; a request still in flight returns 409 `idempotency_conflict`. Records expire after 24 hours.",
+        "schema": {
+          "type": "string",
+          "maxLength": 255
+        }
       }
     },
     "headers": {
+      "X-Request-Id": {
+        "description": "Opaque request identifier. Propagated from the caller's X-Request-Id header if present; otherwise generated from the Cloud Trace context or a fresh UUID. Include in bug reports to allow log correlation.",
+        "schema": {
+          "type": "string"
+        }
+      },
       "X-RateLimit-Limit": {
         "description": "Requests permitted per fixed window for this key tier.",
         "schema": {
@@ -1524,6 +1555,24 @@
       },
       "X-RateLimit-Reset": {
         "description": "Unix epoch seconds at which the current window resets.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "RateLimit-Limit": {
+        "description": "Requests permitted per fixed window for this key tier (IETF RateLimit standard; same value as X-RateLimit-Limit).",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "RateLimit-Remaining": {
+        "description": "Requests remaining in the current window (IETF RateLimit standard; same value as X-RateLimit-Remaining).",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "RateLimit-Reset": {
+        "description": "Seconds remaining until the current window resets (IETF RateLimit standard; delta-seconds, NOT the epoch value carried by X-RateLimit-Reset).",
         "schema": {
           "type": "integer"
         }
@@ -1545,8 +1594,8 @@
             "properties": {
               "code": {
                 "type": "string",
-                "description": "Stable machine-readable error code. Two distinct codes share HTTP 403: `forbidden` (the key lacks the required scope — fix the key's scopes) and `api_disabled` (the Developer API is not enabled for the workspace — create an API key in your dashboard to enable it). Two share HTTP 429: `rate_limited` (the per-key request budget; honor the X-RateLimit-* and Retry-After headers) and `too_many_requests` (the per-IP authentication-failure backstop on unauthenticated traffic).",
-                "enum": [
+                "description": "Stable machine-readable error code. Two distinct codes share HTTP 403: `forbidden` (the key lacks the required scope — fix the key's scopes) and `api_disabled` (the Developer API is not enabled for the workspace — create an API key in your dashboard to enable it). Two share HTTP 429: `rate_limited` (the per-key request budget; honor the X-RateLimit-* and Retry-After headers) and `too_many_requests` (the per-IP authentication-failure backstop on unauthenticated traffic). This list is open: new codes may be added without a version bump, so match on a code only when you recognize it and otherwise fall back to the HTTP status.",
+                "x-extensible-enum": [
                   "unauthorized",
                   "forbidden",
                   "api_disabled",
@@ -1566,6 +1615,9 @@
                   "invalid_target_tags",
                   "invalid_expiry",
                   "tag_not_shareable",
+                  "invalid_idempotency_key",
+                  "idempotency_key_reused",
+                  "idempotency_conflict",
                   "internal"
                 ]
               },
@@ -1654,12 +1706,6 @@
           "verticalAccuracy": {
             "type": [
               "number",
-              "null"
-            ]
-          },
-          "positionType": {
-            "type": [
-              "string",
               "null"
             ]
           },
@@ -2218,7 +2264,8 @@
           },
           "event": {
             "type": "string",
-            "enum": [
+            "description": "The event type. This set may grow over time; handle unknown values gracefully.",
+            "x-extensible-enum": [
               "tag.moved",
               "tag.battery_low",
               "tag.offline"
@@ -2274,7 +2321,8 @@
           },
           "event": {
             "type": "string",
-            "enum": [
+            "description": "The event type. This set may grow over time; handle unknown values gracefully.",
+            "x-extensible-enum": [
               "geofence.entry",
               "geofence.exit",
               "geofence.dwell"
@@ -2631,6 +2679,9 @@
       "TagList": {
         "description": "A page of tags.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2639,6 +2690,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2667,6 +2727,9 @@
       "Tag": {
         "description": "A single tag.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2675,6 +2738,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2693,6 +2765,9 @@
       "TagLocation": {
         "description": "The tag's current location (null when unavailable or paused).",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2701,6 +2776,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2729,6 +2813,9 @@
       "TagHistory": {
         "description": "A page of historical location points.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2737,6 +2824,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2768,6 +2864,9 @@
       "TagBattery": {
         "description": "The tag's battery status.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2776,6 +2875,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2794,6 +2902,9 @@
       "Account": {
         "description": "The current workspace.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2802,6 +2913,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2820,6 +2940,9 @@
       "Usage": {
         "description": "Per-day request counts for the calling key.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2828,6 +2951,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2846,6 +2978,9 @@
       "FleetDelta": {
         "description": "A page of changed tags.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2854,6 +2989,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2882,6 +3026,9 @@
       "GeofenceList": {
         "description": "A page of geofences.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2890,6 +3037,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2918,6 +3074,9 @@
       "Geofence": {
         "description": "A single geofence.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2926,6 +3085,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2944,6 +3112,9 @@
       "GeofenceDeleted": {
         "description": "Deletion acknowledgement.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2952,6 +3123,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -2978,6 +3158,9 @@
       "WebhookList": {
         "description": "A page of webhook subscriptions.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -2986,6 +3169,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3014,6 +3206,9 @@
       "Webhook": {
         "description": "A single webhook subscription (no secret).",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3022,6 +3217,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3040,6 +3244,9 @@
       "WebhookCreated": {
         "description": "The created webhook, including the one-time signing secret.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3048,6 +3255,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3066,6 +3282,9 @@
       "WebhookWithSecret": {
         "description": "The webhook with a freshly rotated signing secret.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3074,6 +3293,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3092,6 +3320,9 @@
       "WebhookDeleted": {
         "description": "Deletion acknowledgement.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3100,6 +3331,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3126,6 +3366,9 @@
       "WebhookTestResult": {
         "description": "The test delivery outcome. `delivered` is true when the endpoint returned 2xx. `eventId` is the delivered envelope's `id` (the value the endpoint received and can echo for correlation).",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3134,6 +3377,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3169,6 +3421,9 @@
       "WebhookDeliveryList": {
         "description": "A page of delivery records, newest first.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3177,6 +3432,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3205,6 +3469,9 @@
       "ShareLinkList": {
         "description": "A page of share links.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3213,6 +3480,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3241,6 +3517,9 @@
       "ShareLink": {
         "description": "A single share link.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3249,6 +3528,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3267,6 +3555,9 @@
       "ShareLinkCreated": {
         "description": "The newly minted share link. The `url` (which contains the access token) is returned here; surface it to the intended viewer.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3275,6 +3566,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3293,6 +3593,9 @@
       "ShareLinkRevoked": {
         "description": "The revoked share link with its updated status. Revoking is idempotent.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3301,6 +3604,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           }
         },
         "content": {
@@ -3373,7 +3685,7 @@
         }
       },
       "Conflict": {
-        "description": "A workspace limit was exceeded.",
+        "description": "A workspace limit was exceeded, or (on create endpoints that accept an `Idempotency-Key`) the key was reused with a different request body or is still in flight. The specific cause is in `error.code` (for example `idempotency_key_reused` or `idempotency_conflict`).",
         "content": {
           "application/json": {
             "schema": {
@@ -3393,7 +3705,15 @@
         }
       },
       "MethodNotAllowed": {
-        "description": "The HTTP method is not allowed for this path.",
+        "description": "The HTTP method is not allowed for this path. The `Allow` response header lists the methods that are.",
+        "headers": {
+          "Allow": {
+            "description": "RFC 9110 §15.5.6: a comma-separated list of the HTTP methods this path supports (for example `GET, POST`).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
         "content": {
           "application/json": {
             "schema": {
@@ -3415,6 +3735,9 @@
       "RateLimited": {
         "description": "Rate limit exceeded.",
         "headers": {
+          "X-Request-Id": {
+            "$ref": "#/components/headers/X-Request-Id"
+          },
           "X-RateLimit-Limit": {
             "$ref": "#/components/headers/X-RateLimit-Limit"
           },
@@ -3423,6 +3746,15 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/X-RateLimit-Reset"
+          },
+          "RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimit-Limit"
+          },
+          "RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimit-Remaining"
+          },
+          "RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimit-Reset"
           },
           "Retry-After": {
             "description": "Seconds to wait before retrying.",

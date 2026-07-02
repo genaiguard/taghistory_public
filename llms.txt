@@ -35,7 +35,8 @@ the raw key is shown only once at creation.
 ## Conventions
 - List endpoints return { data, nextCursor }. Pass nextCursor back as ?cursor= for the next page; null means end.
 - Timestamps are ISO-8601; time-range params also accept epoch milliseconds.
-- Rate-limit headers: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset. 429 includes Retry-After.
+- Rate-limit headers: X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset (and the IETF RateLimit-* equivalents). 429 includes Retry-After.
+- Idempotency: create POSTs accept an optional Idempotency-Key header; a retry with the same key replays the first response (Idempotent-Replayed: true) instead of creating a duplicate.
 - Errors: { "error": { "code": string, "message": string } }.
 - Coordinates are suppressed while a tag's recording is paused (recordingPaused: true).
 
