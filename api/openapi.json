@@ -1907,7 +1907,22 @@
                 "type": [
                   "string",
                   "null"
-                ]
+                ],
+                "description": "Primary alert recipient (equals emailAddresses[0] when a list is set). Retained for back-compat."
+              },
+              "emailAddresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Full To-recipient list for email alerts (dashboard-configured)."
+              },
+              "emailCcAddresses": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "CC-recipient list for email alerts (dashboard-configured)."
               },
               "pushEnabled": {
                 "type": "boolean"
