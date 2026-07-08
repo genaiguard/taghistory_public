@@ -161,10 +161,13 @@
         ],
         "operationId": "getTagLocation",
         "summary": "Get a tag's current location",
-        "description": "Returns the tag's most recent location. `data` is null when there is no fix, no linked hardware, or recording is paused (`recordingPaused: true`). Requires `read:locations`.",
+        "description": "Returns the tag's most recent location. `data` is null when there is no fix, no linked hardware, or recording is paused (`recordingPaused: true`). Supports conditional requests: 200 responses carry an `ETag`; replay it via `If-None-Match` to receive `304 Not Modified` (empty body) while the location is unchanged. 304 responses still count against rate limits and metered usage. Requires `read:locations`.",
         "responses": {
           "200": {
             "$ref": "#/components/responses/TagLocation"
+          },
+          "304": {
+            "description": "Not modified — the location has not changed since the ETag presented in If-None-Match. Empty body."
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -1689,6 +1692,15 @@
           },
           "timestampMs": {
             "type": "integer"
+          },
+          "endTimestampMs": {
+            "type": "integer",
+            "description": "End of the sighting window this point covers, in epoch milliseconds. Identical repeated sightings within a UTC day may be stored as one point spanning [timestampMs, endTimestampMs]. For a plain single sighting this equals `timestampMs`."
+          },
+          "sampleCount": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Number of raw sightings this point represents (1 for a plain single sighting)."
           },
           "accuracy": {
             "type": [
