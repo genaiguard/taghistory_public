@@ -1,0 +1,17 @@
+# TagLogger geofence import template
+# Rows starting with # are ignored. Do not edit the header row below. Blank optional cells apply the defaults described here.
+"# geofence_id: system-generated, leave EMPTY for new fences. ""Download current geofences"" fills it in; never type your own."
+"# fence_name: display name, up to 200 characters. Used to match existing fences when geofence_id is blank."
+"# tags: tag names separated by semicolons (not commas), or write all for every tag."
+"# latitude / longitude: decimal degrees, e.g. 42.4733 and -83.4021."
+"# radius_m: circle radius in meters, 10 to 100000. Blank means 250."
+"# alert_on: entry, exit, both, or none. Blank means both. Controls email alerts only; crossings are always recorded."
+"# still_outside_min: still-outside reminder in minutes, 30 to 20160. Blank or 0 turns it off."
+"# email_to / email_cc: alert addresses separated by semicolons, up to 5 each. Blank email_to turns email alerts off."
+# color: 6-digit hex like #1f2937. Blank means #111827.
+"# sensitivity: instant, balanced, or cautious (or 1, 2, 3). How many location updates confirm a crossing before alerting. Blank means instant."
+# active: yes or no. no pauses monitoring without deleting the fence. Blank means yes.
+# delete: leave empty to keep a fence; type yes to delete it.
+geofence_id,fence_name,tags,latitude,longitude,radius_m,alert_on,still_outside_min,email_to,email_cc,color,sensitivity,active,delete
+# Example row (delete the # at the start of the next line to try it). Only geofence_id and delete are meant to stay empty:
+#,Warehouse North Gate,Forklift 3;Trailer 7,42.4733,-83.4021,150,both,120,ops@example.com,manager@example.com,#1f2937,balanced,yes,
